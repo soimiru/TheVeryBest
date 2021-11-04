@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="PLAYER">
+
+    </PreferenceCategory>
+    <PreferenceCategory android:title="GAME PREFERENCES">
+        <ListPreference
+            android:key="Hardmode"
+            android:title="Hardmode"
+            android:summary="Do you want to make the quiz extra hard?"
+            android:entries="@array/Hardmode"
+            android:entryValues="@array/Hardmode"
+        />
+        <ListPreference
+            android:key="NumberQuestions"
+            app:title="Number of questions"
+            android:summary="Choose the number of questions."
+            android:entries="@array/Number_Questions"
+            android:entryValues="@array/Number_Questions"
+        />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="CREDITS">
+        <PreferenceScreen
+            android:title="About us..."
+            android:summary="Who made this quiz.">
+
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetPackage="com.example.theverybest"
+                android:targetClass="com.example.theverybest.CreditsActivity"
+                />
+        </PreferenceScreen>
+    </PreferenceCategory>
+</PreferenceScreen>
