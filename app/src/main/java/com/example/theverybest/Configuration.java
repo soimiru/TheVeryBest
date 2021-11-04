@@ -1,9 +1,8 @@
 package com.example.theverybest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.CheckBox;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.theverybest.fragments.PreferencesFragment;
 
