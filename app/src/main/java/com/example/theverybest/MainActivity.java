@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,9 +20,8 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Button StartButton, CreditsButton, ConfigurationButton;
-    private CheckBox HardMode;
-    private Spinner NumberQuestions;
+    private Button StartButton, ConfigurationButton;
+    private ImageButton ImageStart, ImageSettings;
     private ArrayList<Integer> TotalQuestions = new ArrayList<Integer>();
     private int NumberQuestionsSelected;
 
@@ -33,25 +33,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //MAIN CODE
         //Inicializamos el Start Button
-        StartButton = findViewById(R.id.StartButton);
-        CreditsButton = findViewById(R.id.CreditsButton);
-        ConfigurationButton = findViewById(R.id.ConfigurationButton);
-        HardMode = findViewById(R.id.Hardmode);
-        NumberQuestions = findViewById(R.id.numberQuestions);
+        ImageStart = findViewById(R.id.imagePlay);
+        ImageSettings = findViewById(R.id.imageSettings);
+
         TotalQuestions.add(5);
         TotalQuestions.add(10);
-        NumberQuestions.setOnItemSelectedListener(this);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, TotalQuestions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        NumberQuestions.setPrompt("Select the number of questions");
-        NumberQuestions.setAdapter(adapter);
-
-
 
 
 
         //Comportamiento Start Button
-        StartButton.setOnClickListener(new View.OnClickListener() {
+        ImageStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Llamamos a la Activity Test
@@ -71,15 +64,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intent);
             }
         });
-        CreditsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, CreditsActivity.class);
-                startActivity(intent);
-            }
-        });
 
-        ConfigurationButton.setOnClickListener(new View.OnClickListener() {
+
+        ImageSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToConfiguration();

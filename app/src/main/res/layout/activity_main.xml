@@ -12,74 +12,92 @@
         android:id="@+id/MainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="16dp">
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="371dp"
-            android:layout_height="302dp"
+            android:layout_width="365dp"
+            android:layout_height="238dp"
             android:layout_centerHorizontal="true"
             app:srcCompat="@drawable/logo">
 
         </ImageView>
 
 
-        <Button
-            android:id="@+id/StartButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="300dp"
-            android:backgroundTint="#000000"
-            android:text="START"
-            android:textColor="#FFFFFF"
-            android:textSize="30sp" />
-
-        <CheckBox
-            android:id="@+id/Hardmode"
+        <ImageButton
+            android:id="@+id/imagePlay"
             android:layout_width="150dp"
-            android:layout_height="44dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/imageView"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/play" />
+
+        <ImageButton
+            android:id="@+id/imageSettings"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/imageView"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginEnd="-30dp"
-            android:layout_marginBottom="30dp"
-            android:text="HardMode" />
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/play" />
 
-        <Spinner
-            android:id="@+id/numberQuestions"
-            android:layout_width="91dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="57dp"
-            android:layout_above="@+id/Hardmode"
-            android:layout_alignLeft="@+id/Hardmode"
-             />
+        <ImageButton
+            android:id="@+id/imagePlayer"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/imagePlay"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/play" />
 
-        <Button
-            android:id="@+id/CreditsButton"
+        <ImageButton
+            android:id="@+id/imageRanking"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@+id/imagePlay"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="45dp"
+            android:src="@drawable/play" />
+
+        <TextView
+            android:id="@+id/textPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/Hardmode"
-            android:layout_alignParentStart="true"
-            android:backgroundTint="#C32025"
-            android:text="Credits"
-            android:textColor="#ffffff" />
+            android:layout_above="@id/imagePlay"
+            android:layout_marginStart="60dp"
+            android:text="Play"
+            android:textSize="32dp" />
 
-        <Button
-            android:id="@+id/ConfigurationButton"
+        <TextView
+            android:id="@+id/textRanking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/Hardmode"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="128dp"
-            android:layout_marginBottom="224dp"
-            android:backgroundTint="#C32025"
-            android:text="Configuration"
-            android:textColor="#ffffff" />
+            android:layout_below="@+id/imagePlay"
+            android:layout_marginStart="30dp"
+            android:text="Ranking"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/textSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/imagePlay"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"
+            android:text="Settings"
+            android:textSize="32dp" />
+
+        <TextView
+            android:id="@+id/textPlayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imagePlay"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="50dp"
+            android:text="Player"
+            android:textSize="32dp" />
 
 
     </RelativeLayout>
