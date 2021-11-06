@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="Hardmode">
+        <item>Keep it simple</item>
+        <item>Make it hard</item>
+    </array>
+
+    <array name="Number_Questions">
+        <item>5 questions</item>
+        <item>10 questions</item>
+        <item>15 questions</item>
+    </array>
+
+</resources>

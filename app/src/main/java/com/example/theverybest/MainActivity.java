@@ -1,8 +1,10 @@
 package com.example.theverybest;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Button StartButton, CreditsButton;
+    private Button StartButton, CreditsButton, ConfigurationButton;
     private CheckBox HardMode;
     private Spinner NumberQuestions;
     private ArrayList<Integer> TotalQuestions = new ArrayList<Integer>();
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //Inicializamos el Start Button
         StartButton = findViewById(R.id.StartButton);
         CreditsButton = findViewById(R.id.CreditsButton);
+        ConfigurationButton = findViewById(R.id.ConfigurationButton);
         HardMode = findViewById(R.id.Hardmode);
         NumberQuestions = findViewById(R.id.numberQuestions);
         TotalQuestions.add(5);
@@ -44,14 +47,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         NumberQuestions.setAdapter(adapter);
 
 
+
+
+
         //Comportamiento Start Button
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Llamamos a la Activity Test
-                Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                /*Intent intent = new Intent(MainActivity.this, TestActivity.class);
                 intent.putExtra("Hardmode", HardMode.isChecked());
                 intent.putExtra("NumberQuestions", NumberQuestionsSelected);
+                startActivity(intent);*/
+
+                //Preferences
+                PreferenceManager.setDefaultValues(MainActivity.this, R.xml.preferences, false);
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+                GamePreferences.getPreferences(preferences, MainActivity.this);
+
+                Intent intent = new Intent(MainActivity.this, TestActivity.class);
+                intent.putExtra("Hardmode", GamePreferences.gM);
+                intent.putExtra("NumberQuestions", GamePreferences.nQ);
                 startActivity(intent);
             }
         });
@@ -62,6 +78,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 startActivity(intent);
             }
         });
+
+        ConfigurationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToConfiguration();
+            }
+        });
+
+
+
+    }
+
+    public void goToConfiguration(){
+        Intent intent = new Intent(this, Configuration.class);
+        startActivity(intent);
     }
 
     @Override
