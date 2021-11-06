@@ -45,6 +45,7 @@ public class TestActivity extends AppCompatActivity {
 
     //BASE DE DATOS
     private QuestionViewModel questionViewModel;
+    private List<Questions> questionsListFromDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,8 @@ public class TestActivity extends AppCompatActivity {
         questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
             @Override
             public void onChanged(List<Questions> questions) {
-                Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_LONG).show();
+                fetchDataBase(questions);
             }
         });
 
@@ -203,6 +205,11 @@ public class TestActivity extends AppCompatActivity {
         }.start();
     }
 
+
+    private void fetchDataBase(List<Questions> questions){
+        questionsListFromDB = questions;
+
+    }
 
     //Lista de preguntas
     private void fillPool(Boolean hardmode) {
