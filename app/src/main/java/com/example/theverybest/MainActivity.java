@@ -5,6 +5,9 @@ import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,11 +23,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private Button StartButton, ConfigurationButton;
+    private Button musicButton;
     private ImageButton ImageStart, ImageSettings;
     private ArrayList<Integer> TotalQuestions = new ArrayList<Integer>();
-    private int NumberQuestionsSelected;
-
+    private int NumberQuestionsSelected, sonidoRep;
+    SoundPool sp;
+    MediaPlayer snoverSound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //MAIN CODE
         //Inicializamos el Start Button
+        musicButton = findViewById(R.id.buttonMusic);
+        //sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 1);
+        //sonidoRep = sp.load(this, R.raw.snoversound, 1);
         ImageStart = findViewById(R.id.imagePlay);
         ImageSettings = findViewById(R.id.imageSettings);
 
@@ -40,8 +47,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TotalQuestions.add(10);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, TotalQuestions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        snoverSound = MediaPlayer.create(MainActivity.this, R.raw.snoversound);
 
-
+        musicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                snoverSound.start();
+            }
+        });
 
         //Comportamiento Start Button
         ImageStart.setOnClickListener(new View.OnClickListener() {

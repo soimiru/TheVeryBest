@@ -99,6 +99,13 @@
             android:text="Player"
             android:textSize="32dp" />
 
+        <Button
+            android:id="@+id/buttonMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageRanking"
+            android:text="Button" />
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
