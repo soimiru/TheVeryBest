@@ -1,7 +1,5 @@
 package com.example.theverybest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -13,6 +11,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,9 @@ public class TestActivity extends AppCompatActivity {
     private Question currentQuestion;
     private List<Question> questionsPool;
 
+    //BASE DE DATOS
+    private QuestionViewModel questionViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +57,15 @@ public class TestActivity extends AppCompatActivity {
         totalQuestions = getIntent().getIntExtra("NumberQuestions", 5);
         totalQuestions-=2;
         //Toast.makeText(TestActivity.this, "Numero preguntas " + totalQuestions, Toast.LENGTH_SHORT).show();
+
+        //Base de datos
+        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+        questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
+            @Override
+            public void onChanged(List<Questions> questions) {
+                Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         questionsPool = new ArrayList<>();
         tvQuestion = findViewById(R.id.TQuestion);
