@@ -44,6 +44,7 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
         @Override
         protected Void doInBackground(Void... voids) {
 
+            questionDAO.deleteAll();
             questionDAO.insert(new Questions("Which is the heaviest Pokémon?", "Celesteela", "Groudon", "Steeelix", "Waylord", 1));
             questionDAO.insert(new Questions("Where does the skull of Cubone come from?", "From its murdered victim", "From its dead mother", "From its dead father", "From the store", 2));
             questionDAO.insert(new Questions("Which Pokemon can evolve into 8 different forms, depending on how it is raised?", "Ditto", "Metapod", "Pikachu", "Eevee", 4));

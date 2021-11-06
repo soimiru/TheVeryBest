@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -40,12 +39,13 @@ public class TestActivity extends AppCompatActivity {
     ColorStateList dfRbColor;
     boolean answered;
 
-    private Question currentQuestion;
-    private List<Question> questionsPool;
+    //private Question currentQuestion;
+    //private List<Question> questionsPool;
 
     //BASE DE DATOS
     private QuestionViewModel questionViewModel;
-    private List<Questions> questionsListFromDB;
+    private List<Questions> questionsPool;
+    private Questions currentQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +64,12 @@ public class TestActivity extends AppCompatActivity {
         questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
             @Override
             public void onChanged(List<Questions> questions) {
-                Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_LONG).show();
                 fetchDataBase(questions);
+                Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_LONG).show();
             }
         });
 
-        questionsPool = new ArrayList<>();
+        //questionsPool = new ArrayList<>();
         tvQuestion = findViewById(R.id.TQuestion);
         tvScore = findViewById(R.id.TPoints);
         tvQuestionNumber = findViewById(R.id.TQuestionNumber);
@@ -86,9 +86,11 @@ public class TestActivity extends AppCompatActivity {
         dfRbColor = rb1.getTextColors();
 
         //Se rellena el ArrayList de preguntas
-        fillPool(hardmode);
+        //fillPool(hardmode);
         //Se muestra la primera pregunta
-        showNextQuestion();
+
+
+
 
         //Comportamiento del botón para enviar la respuesta y cambiar de pregunta
         NextButton.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +111,8 @@ public class TestActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     //Comprueba si la respuesta escogida es la correcta
@@ -116,7 +120,7 @@ public class TestActivity extends AppCompatActivity {
         answered = true;
         RadioButton rbSelected = findViewById(radioGroup.getCheckedRadioButtonId());
         int answerNumber = radioGroup.indexOfChild(rbSelected) + 1;
-        if (answerNumber == currentQuestion.getRightAnswer()){
+        if (answerNumber == currentQuestion.getAnswer()){
             score+=10;
             totalCorrect++;
             tvScore.setText("Score: "+ score);
@@ -130,7 +134,7 @@ public class TestActivity extends AppCompatActivity {
         rb2.setTextColor(Color.RED);
         rb3.setTextColor(Color.RED);
         rb4.setTextColor(Color.RED);
-        switch (currentQuestion.getRightAnswer()){
+        switch (currentQuestion.getAnswer()){
             case 1:
                 rb1.setTextColor(Color.GREEN);
                 break;
@@ -207,10 +211,11 @@ public class TestActivity extends AppCompatActivity {
 
 
     private void fetchDataBase(List<Questions> questions){
-        questionsListFromDB = questions;
-
+        questionsPool = questions;
+        showNextQuestion();
     }
 
+    /*
     //Lista de preguntas
     private void fillPool(Boolean hardmode) {
         if(hardmode){
@@ -232,12 +237,13 @@ public class TestActivity extends AppCompatActivity {
                 questionsPool.add(new Question("If you need to buy supplies, where do you go?", "Pokémon Center", "Poke Mart", "Gym", "Poke Lab", 2));
                 questionsPool.add(new Question("If you need to revive your fainted Pokémon to full health, where do you go?", "Pokemon Center", "Poke Mart", "Gym", "Poke Lab", 1));
                 questionsPool.add(new Question("What is NOT a type of a starter Pokémon?", "Grass", "Bug", "Water", "Fire", 2));
+                questionsPool.add(new Question("What is NOT a type of a starter Pokémon?", "Grass", "Bug", "Water", "Fire", 2));
                 questionsPool.add(new Question("What item heals a Pokemon's HP by a small amount?", "Potion", "Awakening", "Antidote", "Full Heal", 1));
                 questionsPool.add(new Question("Which Pokémon is able to mimic others?", "Ditto", "Muk", "Porygon", "Mr. Mime", 1));
                 questionsPool.add(new Question("Which Pokémon has an Alolan form?", "Exeggutor", "Chansey", "Kangaskhan", "Seviper", 1));
                 questionsPool.add(new Question("Which of these is NOT the name of a real Pokémon?", "Reshiram", "Agumon", "Dusclops", "Raikou", 2));
                 questionsPool.add(new Question("What is the most common type of Pokémon?", "Water", "Fire", "Grass", "Normal", 1));
         }
-    }
+    }*/
 
 }

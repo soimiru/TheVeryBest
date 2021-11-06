@@ -13,5 +13,8 @@ public interface QuestionDAO {
     @Query("SELECT * from QUESTIONS_TABLE")
     LiveData<List<Questions>> getAllQuestions();
 
+    @Query("DELETE FROM QUESTIONS_TABLE")
+    void deleteAll();
+
     @Insert void insert(Questions questions);
 }
