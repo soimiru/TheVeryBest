@@ -29,8 +29,9 @@ public class TestActivity extends AppCompatActivity {
 
 
     //BASE DE DATOS
-    private QuestionViewModel questionViewModel;
+    //private QuestionViewModel questionViewModel;
     private ArrayList<Questions> questionsPool;
+    public QuestionViewModel questionViewModel ;
     private Questions currentQuestion;
 
 
@@ -75,11 +76,11 @@ public class TestActivity extends AppCompatActivity {
         }
 
         //Base de datos
-        QuestionViewModel questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+
         questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
             @Override
             public void onChanged(List<Questions> questions) {
-
                 if(questionsPool == null){
                     questionsPool = new ArrayList<Questions>();
 
@@ -100,5 +101,6 @@ public class TestActivity extends AppCompatActivity {
     public ArrayList<Questions> getQuestionsPool(){
         return questionsPool;
     }
+
 
 }

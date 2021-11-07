@@ -183,6 +183,7 @@ public class TestFragment extends Fragment {
                         questionsList.add(questions.remove(0));
                     }*/
 
+
                     questionsList = ((TestActivity)getActivity()).getQuestionsPool();
                     perform(view);
                     showNextQuestion();
