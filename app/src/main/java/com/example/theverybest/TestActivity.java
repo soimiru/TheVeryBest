@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -21,7 +22,7 @@ import java.util.Random;
 public class TestActivity extends AppCompatActivity {
 
     //Declaración de variables para utilizar los recursos del layout
-    private TextView tvQuestion, tvScore, tvQuestionNumber, tvTimer;
+    private TextView tvQuestion, tvScore, tvQuestionNumber, tvTimer, tvTimer2;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2, rb3, rb4;
     private Button NextButton;
@@ -41,6 +42,22 @@ public class TestActivity extends AppCompatActivity {
     private Question currentQuestion;
     private List<Question> questionsPool;
 
+    long startTime;
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+            int minutes = seconds/60;
+            seconds = seconds%60;
+
+            tvTimer.setText(String.format("%d:%02d", minutes, seconds));
+            timerHandler.postDelayed(this, 500);
+        };
+    };
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +75,8 @@ public class TestActivity extends AppCompatActivity {
         tvScore = findViewById(R.id.TPoints);
         tvQuestionNumber = findViewById(R.id.TQuestionNumber);
         tvTimer = findViewById(R.id.TTimer);
+        startTime = System.currentTimeMillis();
+        timerHandler.postDelayed(timerRunnable, 0);
 
         radioGroup = findViewById(R.id.radioGroup);
         rb1 = findViewById(R.id.rbOpt1);
@@ -82,7 +101,7 @@ public class TestActivity extends AppCompatActivity {
                 if(!answered){
                     if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
                         checkAnswer();
-                        countDownTimer.cancel();
+                        //countDownTimer.cancel();
                     }else{
                         Toast.makeText(TestActivity.this, "Select one option", Toast.LENGTH_SHORT).show();
                     }
@@ -147,7 +166,7 @@ public class TestActivity extends AppCompatActivity {
         rb4.setTextColor(dfRbColor);
 
         if(counter < totalQuestions){
-            timer();
+            //timer();
             int numberNextQ = r.nextInt(9-counter);
             currentQuestion = questionsPool.get(numberNextQ);
             questionsPool.remove(numberNextQ);
