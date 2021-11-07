@@ -34,7 +34,7 @@ public class TestActivity extends AppCompatActivity {
     private Questions currentQuestion;
 
 
-    long startTime;
+    public long startTime;
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
         @Override
@@ -59,13 +59,15 @@ public class TestActivity extends AppCompatActivity {
         Boolean hardmode = getIntent().getBooleanExtra("Hardmode", false);
         totalQuestions = getIntent().getIntExtra("NumberQuestions", 5);
         tvTimer = findViewById(R.id.TTimer);
-
+        startTime = System.currentTimeMillis();
         TestFragment testFragment = new TestFragment();
+        timerHandler.postDelayed(timerRunnable, 0);
 
         if (savedInstanceState == null) {
             //BUNDLE & FRAGMENT
             Bundle bundle = new Bundle();
             bundle.putInt("totalQuestions", totalQuestions);
+            bundle.putLong("startTime", startTime);
             bundle.putParcelableArrayList("questions", questionsPool);
             testFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
@@ -92,8 +94,8 @@ public class TestActivity extends AppCompatActivity {
 
         //TIMER
 
-        startTime = System.currentTimeMillis();
-        timerHandler.postDelayed(timerRunnable, 0);
+
+
     }
 
 

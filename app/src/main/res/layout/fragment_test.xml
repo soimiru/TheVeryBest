@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentTest"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentTest"
+    android:visibility="visible"
     tools:context=".fragments.TestFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp"
-        android:background="#00000000">
+        android:background="#00000000"
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/TQuestionNumber"
@@ -29,6 +30,7 @@
             android:text="0 Points"
             android:textColor="#000000"
             android:textSize="17sp" />
+
         <TextView
             android:id="@+id/TCorrect"
             android:layout_width="wrap_content"
@@ -38,6 +40,7 @@
             android:text="0 Correct"
             android:textColor="#000000"
             android:textSize="17sp" />
+
         <TextView
             android:id="@+id/TIncorrect"
             android:layout_width="wrap_content"
@@ -73,32 +76,32 @@
                 android:id="@+id/rbOpt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:text=" "
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/rbOpt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:text=" "
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/rbOpt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:text=" "
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
             <RadioButton
                 android:id="@+id/rbOpt4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
                 android:text=" "
+                android:textColor="#FFFFFF"
                 android:textSize="20sp" />
 
         </RadioGroup>
@@ -112,6 +115,20 @@
             android:text="Send"
             android:textColor="#ffffff"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/sound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioGroup"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#C32025"
+            android:text="Listen"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:visibility="invisible"
+            tools:visibility="invisible" />
 
     </RelativeLayout>
 

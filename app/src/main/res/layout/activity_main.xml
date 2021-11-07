@@ -30,7 +30,8 @@
             android:layout_height="150dp"
             android:layout_below="@+id/imageView"
             android:layout_marginLeft="20dp"
-            android:src="@drawable/play" />
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/ic_play" />
 
         <ImageButton
             android:id="@+id/imageSettings"
@@ -39,7 +40,8 @@
             android:layout_below="@+id/imageView"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
-            android:src="@drawable/play" />
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/ic_settings" />
 
         <ImageButton
             android:id="@+id/imagePlayer"
@@ -59,52 +61,16 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:layout_marginTop="45dp"
-            android:src="@drawable/play" />
-
-        <TextView
-            android:id="@+id/textPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/imagePlay"
-            android:layout_marginStart="60dp"
-            android:text="Play"
-            android:textSize="32dp" />
-
-        <TextView
-            android:id="@+id/textRanking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imagePlay"
-            android:layout_marginStart="30dp"
-            android:text="Ranking"
-            android:textSize="32dp" />
-
-        <TextView
-            android:id="@+id/textSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/imagePlay"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50dp"
-            android:text="Settings"
-            android:textSize="32dp" />
-
-        <TextView
-            android:id="@+id/textPlayer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imagePlay"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="50dp"
-            android:text="Player"
-            android:textSize="32dp" />
+            android:backgroundTint="#00FFFFFF"
+            android:src="@drawable/ic_ranking" />
 
         <Button
             android:id="@+id/buttonMusic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageRanking"
-            android:text="Button" />
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:text="illo illo" />
 
 
     </RelativeLayout>
