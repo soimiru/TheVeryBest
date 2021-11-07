@@ -1,21 +1,22 @@
 package com.example.theverybest;
 
-import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.theverybest.fragments.TestFragment;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -44,14 +45,15 @@ public class TestActivity extends AppCompatActivity {
 
     //BASE DE DATOS
     private QuestionViewModel questionViewModel;
-    private List<Questions> questionsPool;
+    private ArrayList<Questions> questionsPool;
     private Questions currentQuestion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
 
+
+        setContentView(R.layout.activity_test);
         //MAIN CODE
         //Inicialización de las variables
         Boolean hardmode = getIntent().getBooleanExtra("Hardmode", false);
@@ -64,11 +66,12 @@ public class TestActivity extends AppCompatActivity {
         questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
             @Override
             public void onChanged(List<Questions> questions) {
-                fetchDataBase(questions);
-                Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_LONG).show();
+                fetchDataBase(questions, savedInstanceState);
+                //Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_SHORT).show();
             }
         });
 
+        /*
         //questionsPool = new ArrayList<>();
         tvQuestion = findViewById(R.id.TQuestion);
         tvScore = findViewById(R.id.TPoints);
@@ -82,8 +85,7 @@ public class TestActivity extends AppCompatActivity {
         rb4 = findViewById(R.id.rbOpt4);
 
         NextButton = findViewById(R.id.SendButton);
-
-        dfRbColor = rb1.getTextColors();
+        dfRbColor = rb1.getTextColors();*/
 
         //Se rellena el ArrayList de preguntas
         //fillPool(hardmode);
@@ -91,7 +93,7 @@ public class TestActivity extends AppCompatActivity {
 
 
 
-
+    /*
         //Comportamiento del botón para enviar la respuesta y cambiar de pregunta
         NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,12 +111,10 @@ public class TestActivity extends AppCompatActivity {
 
                 }
             }
-        });
-
-
+        });*/
 
     }
-
+    /*
     //Comprueba si la respuesta escogida es la correcta
     private void checkAnswer(){
         answered = true;
@@ -207,12 +207,37 @@ public class TestActivity extends AppCompatActivity {
                 showNextQuestion();
             }
         }.start();
-    }
+    }*/
 
 
-    private void fetchDataBase(List<Questions> questions){
-        questionsPool = questions;
-        showNextQuestion();
+    private void fetchDataBase(List<Questions> questions, Bundle savedInstanceState){
+        questionsPool = new ArrayList<Questions>();
+        //questionsPool = questions;
+        //questionsPool = new ArrayList<Questions>();
+        while(questions.size() > 0){
+            questionsPool.add(questions.remove(0));
+        }
+        //Toast.makeText(TestActivity.this, questions.size() + " " + questionsPool.size(), Toast.LENGTH_LONG).show();
+
+        //if (savedInstanceState == null) {
+            //BUNDLE
+            Bundle bundle = new Bundle();
+            bundle.putInt("totalQuestions", totalQuestions);
+            bundle.putParcelableArrayList("questions", questionsPool);
+            //FRAGMENTO
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            TestFragment testFragment = new TestFragment();
+            testFragment.setArguments(bundle);
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragmentTest, testFragment);
+            fragmentTransaction.commit();
+            fragmentManager.beginTransaction()
+                    .setReorderingAllowed(true)
+                    .add(R.id.fragmentTest, testFragment.getClass() , bundle)
+                    .commit();
+        //}
+
+        //showNextQuestion();
     }
 
     /*

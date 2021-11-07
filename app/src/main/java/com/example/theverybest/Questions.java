@@ -1,11 +1,14 @@
 package com.example.theverybest;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "questions_table")
-public class Questions {
+public class Questions implements Parcelable {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private int id;
@@ -44,6 +47,16 @@ public class Questions {
         this.opt3 = opt3;
         this.opt4 = opt4;
         this.answer = answer;
+    }
+
+    protected Questions(Parcel in) {
+        id = in.readInt();
+        question = in.readString();
+        opt1 = in.readString();
+        opt2 = in.readString();
+        opt3 = in.readString();
+        opt4 = in.readString();
+        answer = in.readInt();
     }
 
     public void setId(int id) {
@@ -100,5 +113,34 @@ public class Questions {
 
     public void setAnswer(int answer) {
         this.answer = answer;
+    }
+
+
+    public static final Creator<Questions> CREATOR = new Creator<Questions>() {
+        @Override
+        public Questions createFromParcel(Parcel in) {
+            return new Questions(in);
+        }
+
+        @Override
+        public Questions[] newArray(int size) {
+            return new Questions[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(question);
+        parcel.writeString(opt1);
+        parcel.writeString(opt2);
+        parcel.writeString(opt3);
+        parcel.writeString(opt4);
+        parcel.writeInt(answer);
     }
 }

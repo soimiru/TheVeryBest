@@ -2,7 +2,6 @@ package com.example.theverybest;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
 
 public class GamePreferences {
 
@@ -42,6 +41,6 @@ public class GamePreferences {
         String msj = "Modo juego: "+gameMode+"\n";
         msj+= "Q Number: "+ questionsN+"\n";
 
-        Toast.makeText(context, msj, Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, msj, Toast.LENGTH_LONG).show();
     }
 }
