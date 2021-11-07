@@ -27,10 +27,10 @@
             android:id="@+id/TTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:20"
             android:layout_alignParentEnd="true"
-            android:textSize="37sp"
-            android:textColor="#FFFFFF"/>
+            android:text="00:20"
+            android:textColor="#FFFFFF"
+            android:textSize="37sp" />
 
 
     </RelativeLayout>
