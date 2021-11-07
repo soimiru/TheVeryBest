@@ -75,6 +75,7 @@ public class TestActivity extends AppCompatActivity {
         tvScore = findViewById(R.id.TPoints);
         tvQuestionNumber = findViewById(R.id.TQuestionNumber);
         tvTimer = findViewById(R.id.TTimer);
+
         startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
 
