@@ -16,7 +16,7 @@
             android:id="@+id/TQuestionNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pregunta 1/n"
+            android:text="Pregunta"
             android:textColor="#000000"
             android:textSize="17sp" />
 
@@ -56,7 +56,6 @@
             android:layout_marginBottom="20dp"
             android:background="#7E000000"
             android:padding="10dp"
-            android:text="Question..."
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:textSize="25sp" />
@@ -74,30 +73,33 @@
                 android:id="@+id/rbOpt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 1"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:text=" "
+                android:textSize="20sp" />
+
             <RadioButton
                 android:id="@+id/rbOpt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 2"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:text=" "
+                android:textSize="20sp" />
+
             <RadioButton
                 android:id="@+id/rbOpt3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 3"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:text=" "
+                android:textSize="20sp" />
+
             <RadioButton
                 android:id="@+id/rbOpt4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Option 4"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
+                android:text=" "
+                android:textSize="20sp" />
 
         </RadioGroup>
 

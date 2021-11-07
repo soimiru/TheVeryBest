@@ -1,23 +1,28 @@
 package com.example.theverybest.fragments;
 
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.theverybest.FinishActivity;
+import com.example.theverybest.QuestionViewModel;
 import com.example.theverybest.Questions;
 import com.example.theverybest.R;
+import com.example.theverybest.TestActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TestFragment extends Fragment {
 
@@ -45,9 +50,9 @@ public class TestFragment extends Fragment {
         tvQuestion = v.findViewById(R.id.TQuestion);
 
         tvQuestionNumber = v.findViewById(R.id.TQuestionNumber);
-        tvScore = v.findViewById(R.id.TQuestion);
-        tvCorrect = v.findViewById(R.id.TQuestion);
-        tvIncorrect = v.findViewById(R.id.TQuestion);
+        tvScore = v.findViewById(R.id.TPoints);
+        tvCorrect = v.findViewById(R.id.TCorrect);
+        tvIncorrect = v.findViewById(R.id.TIncorrect);
 
         radioGroup = v.findViewById(R.id.radioGroup);
         rb1 = v.findViewById(R.id.rbOpt1);
@@ -98,17 +103,17 @@ public class TestFragment extends Fragment {
             rb4.setText(currentQuestion.getOpt4());
             counter++;
             NextButton.setText("Send");
-            tvQuestionNumber.setText("Question: "+counter+"/"+(totalQuestions+2));
+            tvQuestionNumber.setText("Question: "+counter+"/"+totalQuestions);
             answered = false;
         }
         else{
-            /*Intent intent = new Intent(TestActivity.this, ImagesActivity.class);
+            Intent intent = new Intent(((TestActivity)getActivity()), FinishActivity.class);
             intent.putExtra("TotalPoints" , score);
             intent.putExtra("TotalCorrect", totalCorrect);
             intent.putExtra("TotalIncorrect", totalIncorrect);
             intent.putExtra("TotalQuestions", totalQuestions);
             intent.putExtra("Counter", counter);
-            startActivity(intent);*/
+            startActivity(intent);
 
         }
     }
@@ -116,7 +121,7 @@ public class TestFragment extends Fragment {
     //Comprueba si la respuesta escogida es la correcta
     private void checkAnswer(View v){
         answered = true;
-        RadioButton rbSelected = v.findViewById(radioGroup.getCheckedRadioButtonId());
+        RadioButton rbSelected = radioGroup.findViewById(radioGroup.getCheckedRadioButtonId());
         int answerNumber = radioGroup.indexOfChild(rbSelected) + 1;
         if (answerNumber == currentQuestion.getAnswer()){
             score+=10;
@@ -128,7 +133,7 @@ public class TestFragment extends Fragment {
             score-=5;
             totalIncorrect++;
             tvScore.setText("Score: "+ score);
-            tvIncorrect.setText(totalIncorrect + " correct");
+            tvIncorrect.setText(totalIncorrect + " Incorrect");
         }
         rb1.setTextColor(Color.RED);
         rb2.setTextColor(Color.RED);
@@ -157,29 +162,43 @@ public class TestFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setRetainInstance(false);
+    public TestFragment() {
+        super(R.layout.fragment_test);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_test, container, false);
-        //super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        //questionsList = this.getArguments().getParcelableArrayList("questions");
-        //totalQuestions = savedInstanceState.getInt("totalQuestions");
 
-        if (savedInstanceState != null) {
-            //questionsList = Collections.unmodifiableList(savedInstanceState.getParcelableArrayList("questions"));
-            questionsList = getArguments().getParcelableArrayList("questions");
-            questionsList = savedInstanceState.getParcelableArrayList("questions");
-            totalQuestions = savedInstanceState.getInt("totalQuestions");
-        }
-        perform(view);
-        return view;
+        //Base de datos
+        QuestionViewModel questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+        questionViewModel.getmAllQuestions().observe(getActivity(), new Observer<List<Questions>>() {
+            @Override
+            public void onChanged(List<Questions> questions) {
+
+                if(questionsList == null){
+                    /*questionsList = new ArrayList<Questions>();
+
+                    while(questions.size() > 0){
+                        questionsList.add(questions.remove(0));
+                    }*/
+
+                    questionsList = ((TestActivity)getActivity()).getQuestionsPool();
+                    perform(view);
+                    showNextQuestion();
+
+                }
+            }
+        });
+
+
+        savedInstanceState = getArguments();
+
+        questionsList = ((TestActivity)getActivity()).getQuestionsPool();
+
+        totalQuestions = savedInstanceState.getInt("totalQuestions");
+
+
+
     }
 }

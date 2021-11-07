@@ -9,8 +9,6 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -58,16 +56,44 @@ public class TestActivity extends AppCompatActivity {
         //Inicialización de las variables
         Boolean hardmode = getIntent().getBooleanExtra("Hardmode", false);
         totalQuestions = getIntent().getIntExtra("NumberQuestions", 5);
-        totalQuestions-=2;
+        //totalQuestions-=2;
         //Toast.makeText(TestActivity.this, "Numero preguntas " + totalQuestions, Toast.LENGTH_SHORT).show();
 
+
+        TestFragment testFragment = new TestFragment();
+
+        if (savedInstanceState == null) {
+            //BUNDLE
+            Bundle bundle = new Bundle();
+            bundle.putInt("totalQuestions", totalQuestions);
+            bundle.putParcelableArrayList("questions", questionsPool);
+            //FRAGMENTO
+            //FragmentManager fragmentManager = getSupportFragmentManager();
+            //TestFragment testFragment = new TestFragment();
+            testFragment.setArguments(bundle);
+            //FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            //fragmentTransaction.replace(R.id.fragmentTest, testFragment);
+            //fragmentTransaction.commit();
+            getSupportFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.fragment_container_view, testFragment)
+                    //.add(R.id.fragment_container_view, testFragment , bundle)
+                    .commit();
+        }
+
         //Base de datos
-        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+        QuestionViewModel questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
         questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
             @Override
             public void onChanged(List<Questions> questions) {
-                fetchDataBase(questions, savedInstanceState);
-                //Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_SHORT).show();
+
+                if(questionsPool == null){
+                    questionsPool = new ArrayList<Questions>();
+
+                    while(questions.size() > 0){
+                        questionsPool.add(questions.remove(0));
+                    }
+                }
             }
         });
 
@@ -219,26 +245,13 @@ public class TestActivity extends AppCompatActivity {
         }
         //Toast.makeText(TestActivity.this, questions.size() + " " + questionsPool.size(), Toast.LENGTH_LONG).show();
 
-        //if (savedInstanceState == null) {
-            //BUNDLE
-            Bundle bundle = new Bundle();
-            bundle.putInt("totalQuestions", totalQuestions);
-            bundle.putParcelableArrayList("questions", questionsPool);
-            //FRAGMENTO
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            TestFragment testFragment = new TestFragment();
-            testFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentTest, testFragment);
-            fragmentTransaction.commit();
-            fragmentManager.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentTest, testFragment.getClass() , bundle)
-                    .commit();
-        //}
-
         //showNextQuestion();
     }
+
+    public ArrayList<Questions> getQuestionsPool(){
+        return questionsPool;
+    }
+
 
     /*
     //Lista de preguntas
