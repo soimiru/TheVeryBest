@@ -1,20 +1,18 @@
 package com.example.theverybest;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.theverybest.fragments.TestFragment;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,20 +38,14 @@ public class TestActivity extends AppCompatActivity {
     ColorStateList dfRbColor;
     boolean answered;
 
-    //private Question currentQuestion;
-    //private List<Question> questionsPool;
-
-    //BASE DE DATOS
-    private QuestionViewModel questionViewModel;
-    private ArrayList<Questions> questionsPool;
-    private Questions currentQuestion;
+    private Question currentQuestion;
+    private List<Question> questionsPool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_test);
+
         //MAIN CODE
         //Inicialización de las variables
         Boolean hardmode = getIntent().getBooleanExtra("Hardmode", false);
@@ -61,18 +53,7 @@ public class TestActivity extends AppCompatActivity {
         totalQuestions-=2;
         //Toast.makeText(TestActivity.this, "Numero preguntas " + totalQuestions, Toast.LENGTH_SHORT).show();
 
-        //Base de datos
-        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
-        questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
-            @Override
-            public void onChanged(List<Questions> questions) {
-                fetchDataBase(questions, savedInstanceState);
-                //Toast.makeText(TestActivity.this, "Get it!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        /*
-        //questionsPool = new ArrayList<>();
+        questionsPool = new ArrayList<>();
         tvQuestion = findViewById(R.id.TQuestion);
         tvScore = findViewById(R.id.TPoints);
         tvQuestionNumber = findViewById(R.id.TQuestionNumber);
@@ -85,15 +66,14 @@ public class TestActivity extends AppCompatActivity {
         rb4 = findViewById(R.id.rbOpt4);
 
         NextButton = findViewById(R.id.SendButton);
-        dfRbColor = rb1.getTextColors();*/
+
+        dfRbColor = rb1.getTextColors();
 
         //Se rellena el ArrayList de preguntas
-        //fillPool(hardmode);
+        fillPool(hardmode);
         //Se muestra la primera pregunta
+        showNextQuestion();
 
-
-
-    /*
         //Comportamiento del botón para enviar la respuesta y cambiar de pregunta
         NextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,16 +91,16 @@ public class TestActivity extends AppCompatActivity {
 
                 }
             }
-        });*/
+        });
 
     }
-    /*
+
     //Comprueba si la respuesta escogida es la correcta
     private void checkAnswer(){
         answered = true;
         RadioButton rbSelected = findViewById(radioGroup.getCheckedRadioButtonId());
         int answerNumber = radioGroup.indexOfChild(rbSelected) + 1;
-        if (answerNumber == currentQuestion.getAnswer()){
+        if (answerNumber == currentQuestion.getRightAnswer()){
             score+=10;
             totalCorrect++;
             tvScore.setText("Score: "+ score);
@@ -134,7 +114,7 @@ public class TestActivity extends AppCompatActivity {
         rb2.setTextColor(Color.RED);
         rb3.setTextColor(Color.RED);
         rb4.setTextColor(Color.RED);
-        switch (currentQuestion.getAnswer()){
+        switch (currentQuestion.getRightAnswer()){
             case 1:
                 rb1.setTextColor(Color.GREEN);
                 break;
@@ -207,40 +187,9 @@ public class TestActivity extends AppCompatActivity {
                 showNextQuestion();
             }
         }.start();
-    }*/
-
-
-    private void fetchDataBase(List<Questions> questions, Bundle savedInstanceState){
-        questionsPool = new ArrayList<Questions>();
-        //questionsPool = questions;
-        //questionsPool = new ArrayList<Questions>();
-        while(questions.size() > 0){
-            questionsPool.add(questions.remove(0));
-        }
-        //Toast.makeText(TestActivity.this, questions.size() + " " + questionsPool.size(), Toast.LENGTH_LONG).show();
-
-        //if (savedInstanceState == null) {
-            //BUNDLE
-            Bundle bundle = new Bundle();
-            bundle.putInt("totalQuestions", totalQuestions);
-            bundle.putParcelableArrayList("questions", questionsPool);
-            //FRAGMENTO
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            TestFragment testFragment = new TestFragment();
-            testFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragmentTest, testFragment);
-            fragmentTransaction.commit();
-            fragmentManager.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentTest, testFragment.getClass() , bundle)
-                    .commit();
-        //}
-
-        //showNextQuestion();
     }
 
-    /*
+
     //Lista de preguntas
     private void fillPool(Boolean hardmode) {
         if(hardmode){
@@ -262,13 +211,12 @@ public class TestActivity extends AppCompatActivity {
                 questionsPool.add(new Question("If you need to buy supplies, where do you go?", "Pokémon Center", "Poke Mart", "Gym", "Poke Lab", 2));
                 questionsPool.add(new Question("If you need to revive your fainted Pokémon to full health, where do you go?", "Pokemon Center", "Poke Mart", "Gym", "Poke Lab", 1));
                 questionsPool.add(new Question("What is NOT a type of a starter Pokémon?", "Grass", "Bug", "Water", "Fire", 2));
-                questionsPool.add(new Question("What is NOT a type of a starter Pokémon?", "Grass", "Bug", "Water", "Fire", 2));
                 questionsPool.add(new Question("What item heals a Pokemon's HP by a small amount?", "Potion", "Awakening", "Antidote", "Full Heal", 1));
                 questionsPool.add(new Question("Which Pokémon is able to mimic others?", "Ditto", "Muk", "Porygon", "Mr. Mime", 1));
                 questionsPool.add(new Question("Which Pokémon has an Alolan form?", "Exeggutor", "Chansey", "Kangaskhan", "Seviper", 1));
                 questionsPool.add(new Question("Which of these is NOT the name of a real Pokémon?", "Reshiram", "Agumon", "Dusclops", "Raikou", 2));
                 questionsPool.add(new Question("What is the most common type of Pokémon?", "Water", "Fire", "Grass", "Normal", 1));
         }
-    }*/
+    }
 
 }
