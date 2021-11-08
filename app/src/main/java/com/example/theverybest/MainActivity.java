@@ -110,6 +110,16 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
     }
 
     @Override
+    public void showMenu() {
+        Utilities.getAvatarList();
+        Utilities.getPlayersList(this);
+        //Se refresca tod
+
+        //Cargar fragment de inicio
+        getSupportFragmentManager().beginTransaction().replace( R.id.containerFragments,initFragment).commit();
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         NumberQuestionsSelected = Integer.parseInt(parent.getSelectedItem().toString());
     }

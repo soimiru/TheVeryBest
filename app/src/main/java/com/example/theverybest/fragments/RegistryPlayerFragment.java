@@ -3,20 +3,24 @@ package com.example.theverybest.fragments;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.theverybest.ConexionSQLiteHelper;
+import com.example.theverybest.GamePreferences;
 import com.example.theverybest.R;
 import com.example.theverybest.Utilities;
 import com.example.theverybest.adapters.AvatarAdapter;
@@ -46,6 +50,7 @@ public class RegistryPlayerFragment extends Fragment {
 
     FloatingActionButton fabRegister;
     EditText nickField;
+    ImageButton backButton;
 
 
     public RegistryPlayerFragment() {
@@ -70,6 +75,7 @@ public class RegistryPlayerFragment extends Fragment {
 
         //INFLAMOS LA VISTA
         view = inflater.inflate(R.layout.fragment_registry_player, container, false);
+        backButton = view.findViewById(R.id.backButton);
         recyclerAvatar = view.findViewById(R.id.recyclerAvatar);
         recyclerAvatar.setLayoutManager(new GridLayoutManager(this.activity, 2));
         recyclerAvatar.setHasFixedSize(true);
@@ -77,10 +83,18 @@ public class RegistryPlayerFragment extends Fragment {
         nickField = view.findViewById(R.id.nicknameInput);  //NICKNAME
         fabRegister = view.findViewById(R.id.registerButton);   //BOTON COMMIT
 
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                interfaceComunicationFragments.showMenu();
+            }
+        });
+
         fabRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 registerPlayer();
+                interfaceComunicationFragments.showMenu();
             }
         });
 
@@ -102,13 +116,11 @@ public class RegistryPlayerFragment extends Fragment {
     }
 
     private void registerPlayer(){
-        System.out.println("Esto funsiona");
 
         if (nickField.getText().toString() != null && !nickField.getText().toString().trim().equals("")){
-            String nick = nickField.getText().toString()+"\n";
+            String nick = nickField.getText().toString();
             int avID = Utilities.selectedAvatar.getId();
             int bestSc = 0;
-            System.out.println(nick + " " + avID);
 
             ConexionSQLiteHelper conn = new ConexionSQLiteHelper(activity, Utilities.PLAYERS_BD, null, 1);
             SQLiteDatabase db = conn.getWritableDatabase();
@@ -123,6 +135,16 @@ public class RegistryPlayerFragment extends Fragment {
 
             if (idResult != -1){
                 Toast.makeText(activity, "New player was registered.", Toast.LENGTH_SHORT).show();
+
+                //GUARDAMOS EN LAS PREFERENCIAS DE LA APP EL NOMBRE Y EL AVATAR DEL JUGADOR CREADO
+                GamePreferences.playerIDPreferences = Integer.parseInt(idResult + "");
+                GamePreferences.nicknamePreferences = "Welcome " + nickField.getText().toString();
+                GamePreferences.avatarIDPreferences = Utilities.selectedAvatar.getId();
+
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                GamePreferences.setPlayerPreferences(preferences, activity);
+                nickField.setText("");
+                interfaceComunicationFragments.showMenu();
             }
             else{
                 Toast.makeText(activity, "Couldn't register new player.", Toast.LENGTH_SHORT).show();

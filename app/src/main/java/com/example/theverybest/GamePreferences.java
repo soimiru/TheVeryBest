@@ -8,10 +8,31 @@ public class GamePreferences {
     public static final String GameMode="Hardmode";
     public static final String QuestionsNumber="NumberQuestions";
 
+    public static final String PLAYERID= "playerID";
+    public static final String NICKNAME= "nickname";
+    public static final String AVATARID= "avatarID";
+
+
     public static String gameMode;
     public static boolean gM = false;
     public static String questionsN;
     public static int nQ;
+
+    public static int playerIDPreferences;
+    public static String nicknamePreferences;
+    public static int avatarIDPreferences;
+
+    public static void setPlayerPreferences(SharedPreferences preferences, Context context){
+        SharedPreferences.Editor editor = preferences.edit();
+        System.out.println(nicknamePreferences + " " +avatarIDPreferences);
+        editor.putString(PLAYERID, ""+ playerIDPreferences);
+        editor.putString(NICKNAME, ""+ nicknamePreferences);
+        editor.putString(AVATARID, ""+ avatarIDPreferences);
+        editor.commit();
+
+        System.out.println(nicknamePreferences + " " +avatarIDPreferences);
+        getPreferences(preferences, context);
+    }
 
     public static void getPreferences(SharedPreferences preferences, Context context){
 
@@ -38,9 +59,8 @@ public class GamePreferences {
             nQ = 15;
         }
 
-        String msj = "Modo juego: "+gameMode+"\n";
-        msj+= "Q Number: "+ questionsN+"\n";
-
-        //Toast.makeText(context, msj, Toast.LENGTH_LONG).show();
+        playerIDPreferences = Integer.parseInt(preferences.getString(PLAYERID, "0"));
+        nicknamePreferences = preferences.getString(NICKNAME, "new trainer");
+        avatarIDPreferences = Integer.parseInt(preferences.getString(AVATARID, "-1"));
     }
 }
