@@ -199,6 +199,7 @@ public class FinishActivity extends AppCompatActivity {
         if(idResult != 1){
             Toast.makeText(this, "New score was registered.", Toast.LENGTH_SHORT).show();
         }
+        System.out.println(db.rawQuery("SELECT COUNT(*) FROM "+Utilities.RANKING_BD, null) + "");
         db.close();
     }
 }

@@ -7,4 +7,5 @@ public interface IComunicationFragments {
     public void managePlayer();
 
     public void showMenu();
+    public void goToRankings();
 }

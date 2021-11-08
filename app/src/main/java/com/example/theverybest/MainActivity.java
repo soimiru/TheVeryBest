@@ -17,6 +17,7 @@ import androidx.preference.PreferenceManager;
 
 import com.example.theverybest.fragments.InitFragment;
 import com.example.theverybest.fragments.PlayerManagementFragment;
+import com.example.theverybest.fragments.RankingFragment;
 import com.example.theverybest.fragments.RegistryPlayerFragment;
 import com.example.theverybest.interfaces.IComunicationFragments;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
     Fragment initFragment;
     Fragment registryPlayer;
     Fragment playerManagement;
+    Fragment rankingFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
 
         registryPlayer = new RegistryPlayerFragment();
         playerManagement = new PlayerManagementFragment();
+        rankingFragment = new RankingFragment();
 
 
         TotalQuestions.add(5);
@@ -78,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
     public void goToConfiguration(){
         Intent intent = new Intent(this, Configuration.class);
         startActivity(intent);
+    }
+
+    public void goToRankings(){
+        getSupportFragmentManager().beginTransaction().replace( R.id.containerFragments, rankingFragment).commit();
     }
 
     public AlertDialog dialogPlayer(){

@@ -88,6 +88,15 @@ public class InitFragment extends Fragment {
 
         });
 
+        rankingBTN = view.findViewById(R.id.rankingBTN);
+
+        rankingBTN.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                interfaceComunicationFragments.goToRankings();
+            }
+        });
+
         //PLAYER
         avatarImage = view.findViewById(R.id.MainAvatarImage);
         nickText = view.findViewById(R.id.MainNickText);
