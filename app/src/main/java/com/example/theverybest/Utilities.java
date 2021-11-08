@@ -17,7 +17,7 @@ public class Utilities {
     public static AvatarVO selectedAvatar = null;
     public static int selectedAvatarID = 0;
 
-    //SQLITE
+    //SQLITE TABLA JUGADORES
     public static final String PLAYERS_BD = "players_bd";
     public static final String PLAYERS_ID = "id";
     public static final String PLAYERS_NAME = "name";
@@ -25,6 +25,23 @@ public class Utilities {
     public static final String PLAYERS_BESTSCORE = "bestscore";
     //QUERYS
     public static final String CREATE_PLAYERS_TABLE = "CREATE TABLE "+ PLAYERS_BD + " ("+ PLAYERS_ID + " INTEGER PRIMARY KEY, "+ PLAYERS_NAME+ " TEXT," + PLAYERS_AVATAR +" INTEGER,"+ PLAYERS_BESTSCORE + " INTEGER)";
+
+
+    //SQLITE TABLA RANKING
+    public static final String RANKING_BD = "ranking_bd";
+    public static final String RANKING_id = "ranking_id";
+    public static final String RANKING_playerid = "playerid";
+    public static final String RANKING_score = "score";
+    public static final String RANKING_right = "right";
+    public static final String RANKING_wrong = "wrong";
+    public static final String RANKING_time = "time";
+
+    public static final String CREATE_RANKING_TABLE = "CREATE TABLE " + RANKING_BD + " ("+ RANKING_id + " INTEGER PRIMARY KEY,"+
+                                                                                            RANKING_playerid + " INTEGER,"+
+                                                                                            RANKING_score + " INTEGER,"+
+                                                                                            RANKING_right + " INTEGER,"+
+                                                                                            RANKING_wrong + " INTEGER,"+
+                                                                                            RANKING_time + " INTEGER)";
 
 
     public static void getAvatarList(){

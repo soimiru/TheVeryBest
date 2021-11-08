@@ -47,6 +47,7 @@ public class PlayerManagementFragment extends Fragment {
     Activity activity = getActivity();
     IComunicationFragments interfaceComunicationFragments;
     PlayerVO playerSelected;
+    int deleteEvent = 0;
 
 
     RecyclerView recyclerAvatars, recyclerPlayers;
@@ -107,7 +108,12 @@ public class PlayerManagementFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                interfaceComunicationFragments.showMenu();
+                if(deleteEvent == 0){
+                    interfaceComunicationFragments.showMenu();
+                }
+                else{
+                    Toast.makeText(activity, "Select a player.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -144,6 +150,7 @@ public class PlayerManagementFragment extends Fragment {
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
                     GamePreferences.setPlayerPreferences(preferences, activity);
 
+                    deleteEvent = 0;
                     interfaceComunicationFragments.showMenu();
                     Toast.makeText(activity, "Welcome " + GamePreferences.nicknamePreferences + " "+ GamePreferences.avatarIDPreferences, Toast.LENGTH_SHORT).show();
 
@@ -170,6 +177,7 @@ public class PlayerManagementFragment extends Fragment {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         deletePlayer();
                         fillPlayersAdapter();
+                        deleteEvent = 1;
                     }
                 }).setPositiveButton("CANCEL", new DialogInterface.OnClickListener() {
                     @Override

@@ -61,6 +61,6 @@ public class GamePreferences {
 
         playerIDPreferences = Integer.parseInt(preferences.getString(PLAYERID, "0"));
         nicknamePreferences = preferences.getString(NICKNAME, "new trainer");
-        avatarIDPreferences = Integer.parseInt(preferences.getString(AVATARID, "-1"));
+        avatarIDPreferences = Integer.parseInt(preferences.getString(AVATARID, "0"));
     }
 }

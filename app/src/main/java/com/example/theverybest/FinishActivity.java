@@ -1,10 +1,13 @@
 package com.example.theverybest;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +34,12 @@ public class FinishActivity extends AppCompatActivity {
         int seconds = (int) (totalTime / 1000); //Transformamos los ms a segundos y minutos
         int minutes = seconds/60;
         seconds = seconds%60;
+        String time = minutes+":"+seconds;
+
+
+        //RANKING
+        registrarResultados(time);
+
 
         //Asociamos Ids con botones y textos
         tvRes = findViewById(R.id.tvRes);
@@ -161,6 +170,9 @@ public class FinishActivity extends AppCompatActivity {
         tvIncorrect.setText(totalIncorrect+ " Incorrects");
         tvTime.setText(String.format("Total Time: "+"%d:%02d", minutes, seconds));
 
+
+
+
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -168,5 +180,25 @@ public class FinishActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void registrarResultados(String time) {
+        int player = GamePreferences.playerIDPreferences;
+
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, Utilities.RANKING_BD, null, 1);
+        SQLiteDatabase db = conn.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(Utilities.RANKING_playerid, player);
+        values.put(Utilities.RANKING_score, score);
+        values.put(Utilities.RANKING_right, totalCorrect);
+        values.put(Utilities.RANKING_wrong, totalIncorrect);
+        values.put(Utilities.RANKING_time, time);
+
+        Long idResult = db.insert(Utilities.RANKING_BD, Utilities.RANKING_id, values);
+        if(idResult != 1){
+            Toast.makeText(this, "New score was registered.", Toast.LENGTH_SHORT).show();
+        }
+        db.close();
     }
 }
