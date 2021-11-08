@@ -9,13 +9,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="10dp"
         android:backgroundTint="#FFFFFF">
+
+        <RelativeLayout
+            android:id="@+id/backgroundLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="10dp">
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="#00B30000"
+                android:src="@mipmap/ic_launcher">
+
+            </ImageButton>
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/idBackgroundLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:padding="10dp"
             android:elevation="8dp">
             
             <TextView
@@ -32,9 +49,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/logInText"
-                android:layout_margin="10dp"
-                android:layout_marginTop="15dp"
-                android:text="Nickname">
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:hint="Insert nickname">
 
             </EditText>
 

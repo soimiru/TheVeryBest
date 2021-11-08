@@ -54,6 +54,8 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        startTime = System.currentTimeMillis();
+
         setContentView(R.layout.activity_test);
         //MAIN CODE
         //Inicialización de las variables
@@ -68,6 +70,7 @@ public class TestActivity extends AppCompatActivity {
             Bundle bundle = new Bundle();
             bundle.putInt("totalQuestions", totalQuestions);
             bundle.putParcelableArrayList("questions", questionsPool);
+            bundle.putLong("startTime", startTime);
             testFragment.setArguments(bundle);
             getSupportFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
@@ -93,7 +96,6 @@ public class TestActivity extends AppCompatActivity {
 
         //TIMER
 
-        startTime = System.currentTimeMillis();
         timerHandler.postDelayed(timerRunnable, 0);
     }
 

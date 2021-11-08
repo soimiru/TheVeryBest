@@ -29,18 +29,19 @@
             android:id="@+id/playBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="#00FFFFFF"
             android:src="@drawable/ic_play" />
 
         <ImageButton
             android:id="@+id/settingsBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="#00FFFFFF"
             android:src="@drawable/ic_settings" />
 
         <ImageButton
@@ -50,15 +51,16 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="#00FFFFFF"
             android:src="@drawable/ic_player" />
 
         <ImageButton
             android:id="@+id/rankingBTN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="#00FFFFFF"
             android:src="@drawable/ic_ranking" />
 
     </GridLayout>

@@ -11,6 +11,15 @@ public class Utilities {
     public static AvatarVO selectedAvatar = null;
     public static int selectedAvatarID = 0;
 
+    //SQLITE
+    public static final String PLAYERS_BD = "players_bd";
+    public static final String PLAYERS_ID = "id";
+    public static final String PLAYERS_NAME = "name";
+    public static final String PLAYERS_AVATAR = "avatar";
+    //QUERYS
+    public static final String CREATE_PLAYERS_TABLE = "CREATE TABLE "+ PLAYERS_BD + " ("+ PLAYERS_ID + " INTEGER PRIMARY KEY, "+ PLAYERS_NAME+ " TEXT," + PLAYERS_AVATAR +" INTEGER)";
+
+
     public static void getAvatarList(){
         avatarList = new ArrayList<AvatarVO>();
 

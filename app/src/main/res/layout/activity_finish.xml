@@ -50,17 +50,17 @@
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
             />
+
         <TextView
-        android:id="@+id/tvIncorrect"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Incorrectas: "
-        android:textSize="30dp"
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/tvCorrect"
-        android:layout_marginTop="20dp"
+            android:id="@+id/tvIncorrect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvCorrect"
             android:layout_centerHorizontal="true"
-        />
+            android:layout_marginTop="20dp"
+            android:text="Incorrectas: "
+            android:textColor="@android:color/black"
+            android:textSize="30dp" />
 
         <TextView
             android:id="@+id/tvFinalScore"
@@ -73,6 +73,16 @@
             android:layout_below="@+id/tvRes"
             android:layout_marginTop="20dp"
             />
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvIncorrect"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Tiempo "
+            android:textColor="@android:color/black"
+            android:textSize="30dp" />
         <Button
             android:id="@+id/btnFin"
             android:layout_width="250dp"

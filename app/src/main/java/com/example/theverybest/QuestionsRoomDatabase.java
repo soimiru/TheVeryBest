@@ -47,29 +47,30 @@ public abstract class QuestionsRoomDatabase extends RoomDatabase {
         protected Void doInBackground(Void... voids) {
 
             questionDAO.deleteAll();
+
             questionDAO.insert(new Questions("Which is the heaviest Pokémon?", "Celesteela", "Groudon", "Steeelix", "Waylord", 1));
-            questionDAO.insert(new Questions("Where does the skull of Cubone come from?", "From its murdered victim", "From its dead mother", "From its dead father", "From the store", 2));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Illomon", "Snover", "Carnivine", "Victini", 2));
             questionDAO.insert(new Questions("Which Pokemon can evolve into 8 different forms, depending on how it is raised?", "Ditto", "Metapod", "Pikachu", "Eevee", 4));
-            questionDAO.insert(new Questions("How many types of Pokémon are there?", "10 types", "15 types", "18 types", "21 types", 3));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Arceus", "Murlocmon", "Not a Pokemon XD", "Spinda", 3));
             questionDAO.insert(new Questions("Which is the lightest Pokémon?", "Kartana", "Mimikyu", "Rotom", "Wishiwashi", 1));
             //5
-            questionDAO.insert(new Questions("What's the most effective Poke Ball?", "SuperBall", "MasterBall", "UltraBall", "HonorBall", 2));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Pichu", "Pikachu", "Raichu", "Alolan Raichu", 2));
             questionDAO.insert(new Questions("Which of these is NOT an evolutionary stone?", "Fire Stone", "Water Stone", "Thunder Stone", "Dragon Stone", 4));
-            questionDAO.insert(new Questions("What type of Pokémon is Mewtwo?", "Sinister", "Fairy", "Psychic", "Fighting", 3));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Bulbasaur", "Squirtmon", "Squirtle", "Spinda", 3));
             questionDAO.insert(new Questions("What Pokémon can be resurrected from the Helix Fossil?", "Omanyte", "Aerodactyl", "Kabuto", "Cloyster", 1));
-            questionDAO.insert(new Questions("Which of the following Pokémon seems to have a headache at all times?", "Chansey", "Psyduck", "Jigglypluf", "Spinda", 2));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Chansey", "Psyduck", "Jigglypluf", "Spinda", 2));
             //10
             questionDAO.insert(new Questions("Of the following Pokémon, which is the smallest?", "Ralts", "Whismur", "Roselia", "Joltik", 4));
-            questionDAO.insert(new Questions("How many Unown are there?", "28", "46", "26", "30", 1));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Kricketune", "Agumon", "Gyarados", "Spinda", 1));
             questionDAO.insert(new Questions("Which Pokémon isn’t an evolution of Eevee?", "Lumineon", "Sylveon", "Leafeon", "Glaceon", 1));
-            questionDAO.insert(new Questions("Which of these Pokémon does not evolve?", "Bergmite", "Castform", "Lickitung", "Cosmog", 2));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Bergmite", "Castform", "Lickitung", "Cosmog", 2));
             questionDAO.insert(new Questions("Which of these Pokémon is told to be the most beautiful?", "Milotic", "Gardevoir", "Primarina", "Ninetales", 1));
             //15
-            questionDAO.insert(new Questions("What Pokemon is correctly spelled?", "Gayardos","Eggsecutor","Zigzagoon","Lioone",3));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Gyarados","Exeggutor","Zigzagoon","Linoone",3));
             questionDAO.insert(new Questions("Which is the cheapest Poke Ball you can buy?","Ultra Ball","Super Ball","Poke ball","Honor Ball",3));
-            questionDAO.insert(new Questions("Which is the most common Pokémon you can find in a cave?", "Digglet","Geodude","Onix","Zubat", 4));
+            questionDAO.insert(new Questions("Who's that Pokemon?", "Digglet","Geodude","Onix","Zubat", 4));
             questionDAO.insert(new Questions("Which item you should choose to wake Snorlax?", "Potion","Poke flute","Poke Ball","Revive",2));
-            questionDAO.insert(new Questions("Who's the Pokémon that looks like a Poke Ball?","Eelektross", "Voltrode", "Electrode", "Voltorb", 3));
+            questionDAO.insert(new Questions("Who's that Pokemon?","Eelektross", "Voltrode", "Electrode", "Voltorb", 3));
 
 
             return null;

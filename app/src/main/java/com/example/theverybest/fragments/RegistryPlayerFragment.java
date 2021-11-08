@@ -1,7 +1,9 @@
 package com.example.theverybest.fragments;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.theverybest.ConexionSQLiteHelper;
 import com.example.theverybest.R;
 import com.example.theverybest.Utilities;
 import com.example.theverybest.adapters.AvatarAdapter;
@@ -99,14 +102,30 @@ public class RegistryPlayerFragment extends Fragment {
 
     private void registerPlayer(){
         System.out.println("Esto funsiona");
-        String nick = "";
-
-        int avID = 0;
 
         if (nickField.getText().toString() != null && !nickField.getText().toString().trim().equals("")){
-            nick = nickField.getText().toString()+"\n";
-            avID = Utilities.selectedAvatar.getId();
+            String nick = nickField.getText().toString()+"\n";
+            int avID = Utilities.selectedAvatar.getId();
             System.out.println(nick + " " + avID);
+
+            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(activity, Utilities.PLAYERS_BD, null, 1);
+            SQLiteDatabase db = conn.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put(Utilities.PLAYERS_AVATAR, avID);
+            values.put(Utilities.PLAYERS_NAME, nick);
+
+            System.out.println(values.size());
+            Long idResult = db.insert(Utilities.PLAYERS_BD, Utilities.PLAYERS_ID, values);
+
+            if (idResult != -1){
+                Toast.makeText(activity, "New player was registered.", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(activity, "Couldn't register new player.", Toast.LENGTH_SHORT).show();
+            }
+            db.close();
+
         }
         else{
             Toast.makeText(activity, "Incorrect nickname", Toast.LENGTH_SHORT).show();

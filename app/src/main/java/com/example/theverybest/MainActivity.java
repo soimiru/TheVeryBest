@@ -3,16 +3,12 @@ package com.example.theverybest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,22 +16,24 @@ import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 
 import com.example.theverybest.fragments.InitFragment;
+import com.example.theverybest.fragments.PlayerManagementFragment;
 import com.example.theverybest.fragments.RegistryPlayerFragment;
 import com.example.theverybest.interfaces.IComunicationFragments;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements IComunicationFragments,InitFragment.OnFragmentInteractionListener ,AdapterView.OnItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements IComunicationFragments,
+        InitFragment.OnFragmentInteractionListener ,
+        AdapterView.OnItemSelectedListener,
+        PlayerManagementFragment.OnFragmentInteractionListener {
 
-    private Button musicButton;
     private ImageButton ImageStart, ImageSettings, PlayerBtn;
     private ArrayList<Integer> TotalQuestions = new ArrayList<Integer>();
-    private int NumberQuestionsSelected, sonidoRep;
-    SoundPool sp;
-    MediaPlayer snoverSound;
+    private int NumberQuestionsSelected;
 
     Fragment initFragment;
     Fragment registryPlayer;
+    Fragment playerManagement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,35 +41,23 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         setContentView(R.layout.activity_main);
 
         //MAIN CODE
-        //Inicializamos el Start Button
-        musicButton = findViewById(R.id.buttonMusic);
-        //sp = new SoundPool(1, AudioManager.STREAM_MUSIC, 1);
-        //sonidoRep = sp.load(this, R.raw.snoversound, 1);
-
-
 
         //FRAGMENTO INICIAL
         initFragment = new InitFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.containerFragments, initFragment).commit();
 
         Utilities.getAvatarList();
+
+        ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, Utilities.PLAYERS_BD, null, 1);
+
         registryPlayer = new RegistryPlayerFragment();
+        playerManagement = new PlayerManagementFragment();
 
 
         TotalQuestions.add(5);
         TotalQuestions.add(10);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, TotalQuestions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        snoverSound = MediaPlayer.create(MainActivity.this, R.raw.snoversound);
-
-        musicButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                snoverSound.start();
-            }
-        });
-
-
 
 
     }
@@ -111,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
                 }).setPositiveButton("MODIFY", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Toast.makeText(getApplicationContext(), "LOG IN", Toast.LENGTH_SHORT).show();
+                        getSupportFragmentManager().beginTransaction().replace( R.id.containerFragments,playerManagement).commit();
                     }
                 });
         return builder.create();
