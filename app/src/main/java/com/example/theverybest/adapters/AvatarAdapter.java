@@ -55,12 +55,26 @@ public class AvatarAdapter extends RecyclerView.Adapter<AvatarAdapter.ViewHolder
             }
         });
 
-        if(positionAvatar == position){
-            holder.selectionBar.setBackgroundColor(view.getResources().getColor(R.color.black));
+        if(Utilities.selectedAvatarID ==0){
+            if(positionAvatar == position){
+                holder.selectionBar.setBackgroundColor(view.getResources().getColor(R.color.black));
+            }
+            else{
+                holder.selectionBar.setBackgroundColor(view.getResources().getColor(R.color.yourColorTitle));
+            }
+
         }
         else{
-            holder.selectionBar.setBackgroundColor(view.getResources().getColor(R.color.yourColorTitle));
+            if(Utilities.selectedAvatarID-1 == pos){
+                holder.selectionBar.setBackgroundColor(view.getResources().getColor(R.color.black));
+            }
+            else{
+                holder.selectionBar.setBackgroundColor(view.getResources().getColor(R.color.yourColorTitle));
+            }
+
         }
+
+
     }
 
     @Override

@@ -22,14 +22,21 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
     List<PlayerVO> playerList;
     View view;
     int positionAvatar;
+    private View.OnClickListener listener;
 
     public PlayerAdapter(List<PlayerVO> playerList) {
         this.playerList = playerList;
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
+        if(listener != null){
+            listener.onClick(v);
+        }
+    }
 
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
     }
 
     @NonNull

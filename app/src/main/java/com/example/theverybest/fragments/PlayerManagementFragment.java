@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,8 @@ import com.example.theverybest.Utilities;
 import com.example.theverybest.adapters.AvatarAdapter;
 import com.example.theverybest.adapters.PlayerAdapter;
 import com.example.theverybest.interfaces.IComunicationFragments;
+import com.example.theverybest.vo.PlayerVO;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,12 +36,16 @@ public class PlayerManagementFragment extends Fragment {
     View view;
     Activity activity = getActivity();
     IComunicationFragments interfaceComunicationFragments;
+    PlayerVO playerSelected;
 
 
     RecyclerView recyclerAvatars, recyclerPlayers;
     EditText nickField;
+    TextView barSelected;
 
     ImageButton backButton;
+
+    FloatingActionButton fabConfirm, fabDelete, fabUpdate;
 
     public PlayerManagementFragment() {
         // Required empty public constructor
@@ -74,6 +82,11 @@ public class PlayerManagementFragment extends Fragment {
         recyclerPlayers = view.findViewById(R.id.recyclerPlayers);
         nickField = view.findViewById(R.id.nicknameInputUpdate);
         backButton = view.findViewById(R.id.backButton);
+        barSelected = view.findViewById(R.id.selectionBar);
+
+        fabConfirm = view.findViewById(R.id.idfabConfirm);
+        fabUpdate = view.findViewById(R.id.idfabUpdate);
+        fabDelete = view.findViewById(R.id.idfabDelete);
 
         recyclerPlayers.setLayoutManager(new LinearLayoutManager(this.activity));
         recyclerPlayers.setHasFixedSize(true);
@@ -81,20 +94,63 @@ public class PlayerManagementFragment extends Fragment {
         recyclerAvatars.setLayoutManager(new GridLayoutManager(this.activity, 2));
         recyclerAvatars.setHasFixedSize(true);
 
-        fillAvatarsAdapter();
+        fabUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                updatePlayer();
+            }
+        });
+        
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletePlayer();
+            }
+        });
+
+        fabConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(activity, "CONFIRMAR", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        fillAvatarsAdapter(0);
         fillPlayersAdapter();
 
         return view;
     }
 
+
+
+    private void deletePlayer() {
+        Toast.makeText(activity, "BORRADO", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updatePlayer() {
+        Toast.makeText(activity, "ACTUALIZADO", Toast.LENGTH_SHORT).show();
+    }
+
     private void fillPlayersAdapter() {
         PlayerAdapter playerAdapter = new PlayerAdapter(Utilities.playersList);
+
+        playerAdapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playerSelected = Utilities.playersList.get(recyclerPlayers.getChildAdapterPosition(view));
+                nickField.setText(playerSelected.getName());
+
+                fillAvatarsAdapter(playerSelected.getAvatar());
+            }
+        });
+
         recyclerPlayers.setAdapter(playerAdapter);
     }
 
-    private void fillAvatarsAdapter() {
-
+    private void fillAvatarsAdapter(int avatarID) {
+        Utilities.selectedAvatarID = avatarID;
         AvatarAdapter avatarAdapter = new AvatarAdapter(Utilities.avatarList);
+        recyclerAvatars.scrollToPosition(avatarID-1);
         recyclerAvatars.setAdapter(avatarAdapter);
     }
 

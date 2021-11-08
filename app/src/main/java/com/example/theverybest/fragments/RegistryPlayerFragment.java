@@ -47,6 +47,7 @@ public class RegistryPlayerFragment extends Fragment {
     FloatingActionButton fabRegister;
     EditText nickField;
 
+
     public RegistryPlayerFragment() {
         // Required empty public constructor
     }
