@@ -106,6 +106,7 @@ public class RegistryPlayerFragment extends Fragment {
         if (nickField.getText().toString() != null && !nickField.getText().toString().trim().equals("")){
             String nick = nickField.getText().toString()+"\n";
             int avID = Utilities.selectedAvatar.getId();
+            int bestSc = 0;
             System.out.println(nick + " " + avID);
 
             ConexionSQLiteHelper conn = new ConexionSQLiteHelper(activity, Utilities.PLAYERS_BD, null, 1);
@@ -114,6 +115,7 @@ public class RegistryPlayerFragment extends Fragment {
             ContentValues values = new ContentValues();
             values.put(Utilities.PLAYERS_AVATAR, avID);
             values.put(Utilities.PLAYERS_NAME, nick);
+            values.put(Utilities.PLAYERS_BESTSCORE, bestSc);
 
             System.out.println(values.size());
             Long idResult = db.insert(Utilities.PLAYERS_BD, Utilities.PLAYERS_ID, values);

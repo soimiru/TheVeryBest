@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.theverybest.R;
 import com.example.theverybest.Utilities;
 import com.example.theverybest.adapters.AvatarAdapter;
+import com.example.theverybest.adapters.PlayerAdapter;
 import com.example.theverybest.interfaces.IComunicationFragments;
 
 /**
@@ -81,8 +82,14 @@ public class PlayerManagementFragment extends Fragment {
         recyclerAvatars.setHasFixedSize(true);
 
         fillAvatarsAdapter();
+        fillPlayersAdapter();
 
         return view;
+    }
+
+    private void fillPlayersAdapter() {
+        PlayerAdapter playerAdapter = new PlayerAdapter(Utilities.playersList);
+        recyclerPlayers.setAdapter(playerAdapter);
     }
 
     private void fillAvatarsAdapter() {

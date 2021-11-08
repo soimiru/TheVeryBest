@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         getSupportFragmentManager().beginTransaction().replace(R.id.containerFragments, initFragment).commit();
 
         Utilities.getAvatarList();
+        Utilities.getPlayersList(this);
 
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, Utilities.PLAYERS_BD, null, 1);
 
