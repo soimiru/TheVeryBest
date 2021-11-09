@@ -55,6 +55,26 @@ public class Utilities {
         avatarList.add(new AvatarVO(2, R.drawable.avatar2, "Avatar2"));
         avatarList.add(new AvatarVO(3, R.drawable.avatar3, "Avatar3"));
         avatarList.add(new AvatarVO(4, R.drawable.avatar4, "Avatar4"));
+        avatarList.add(new AvatarVO(5, R.drawable.avatar5, "Avatar5"));
+        avatarList.add(new AvatarVO(6, R.drawable.avatar6, "Avatar6"));
+        avatarList.add(new AvatarVO(7, R.drawable.avatar7, "Avatar7"));
+        avatarList.add(new AvatarVO(8, R.drawable.avatar8, "Avatar8"));
+        avatarList.add(new AvatarVO(9, R.drawable.avatar9, "Avatar9"));
+        avatarList.add(new AvatarVO(10, R.drawable.avatar10, "Avatar10"));
+        avatarList.add(new AvatarVO(11, R.drawable.avatar11, "Avatar11"));
+        avatarList.add(new AvatarVO(12, R.drawable.avatar12, "Avatar12"));
+        avatarList.add(new AvatarVO(13, R.drawable.avatar13, "Avatar13"));
+        avatarList.add(new AvatarVO(14, R.drawable.avatar14, "Avatar14"));
+        avatarList.add(new AvatarVO(15, R.drawable.avatar15, "Avatar15"));
+        avatarList.add(new AvatarVO(16, R.drawable.avatar16, "Avatar16"));
+        avatarList.add(new AvatarVO(17, R.drawable.avatar17, "Avatar17"));
+        avatarList.add(new AvatarVO(18, R.drawable.avatar18, "Avatar18"));
+        avatarList.add(new AvatarVO(19, R.drawable.avatar19, "Avatar19"));
+        avatarList.add(new AvatarVO(20, R.drawable.avatar20, "Avatar20"));
+        avatarList.add(new AvatarVO(21, R.drawable.avatar21, "Avatar21"));
+        avatarList.add(new AvatarVO(22, R.drawable.avatar22, "Avatar22"));
+        avatarList.add(new AvatarVO(23, R.drawable.avatar23, "Avatar23"));
+        avatarList.add(new AvatarVO(24, R.drawable.avatar24, "Avatar24"));
 
         selectedAvatar = avatarList.get(0);
 
