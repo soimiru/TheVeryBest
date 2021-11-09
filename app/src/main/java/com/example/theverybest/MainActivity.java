@@ -87,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         GamePreferences.getPreferences(preferences, MainActivity.this);
 
         Intent intent = new Intent(MainActivity.this, TestActivity.class);
-        intent.putExtra("Hardmode", GamePreferences.gameMode);
-        intent.putExtra("NumberQuestions", GamePreferences.questionsN);
+        intent.putExtra("Hardmode", GamePreferences.gM);
+        intent.putExtra("NumberQuestions", GamePreferences.nQ);
         intent.putExtra("QuestionsPool", questionsPool);
         startActivity(intent);
     }
