@@ -25,6 +25,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
             android:text="Congratulations!!"
+            android:textStyle="bold"
             android:textColor="#000000"
             android:textSize="40dp" />
 
@@ -33,23 +34,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
-            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:text="Results:"
             android:textColor="#000000"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvCorrect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correctas: "
-            android:textSize="30dp"
-            android:textColor="@android:color/black"
             android:layout_below="@+id/tvFinalScore"
-            android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            />
+            android:layout_marginTop="20dp"
+            android:text="Correctas: "
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvIncorrect"
@@ -60,19 +60,18 @@
             android:layout_marginTop="20dp"
             android:text="Incorrectas: "
             android:textColor="@android:color/black"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/tvFinalScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Final Score: "
-            android:textSize="30dp"
-            android:layout_centerHorizontal="true"
-            android:textColor="@android:color/black"
             android:layout_below="@+id/tvRes"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            />
+            android:text="Final Score: "
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
         <TextView
             android:id="@+id/tvTime"
             android:layout_width="wrap_content"
@@ -82,14 +81,16 @@
             android:layout_marginTop="20dp"
             android:text="Tiempo "
             android:textColor="@android:color/black"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
+
         <Button
             android:id="@+id/btnFin"
-            android:layout_width="250dp"
-            android:layout_height="72dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="250dp"
             android:backgroundTint="#C32025"
-            android:layout_below="@+id/tvIncorrect"
-            android:layout_marginTop="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
             android:layout_centerHorizontal="true"
             android:text="FINISH"
             android:textColor="#ffffff"

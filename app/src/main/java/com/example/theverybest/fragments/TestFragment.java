@@ -8,6 +8,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -22,10 +23,12 @@ import com.example.theverybest.R;
 import com.example.theverybest.TestActivity;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class TestFragment extends Fragment {
 
     private ArrayList<Questions> questionsList = new ArrayList<Questions>();
+    private ArrayList<Questions> allQuestions = new ArrayList<Questions>();
     Activity testActivity = getActivity();
     private Questions currentQuestion;
     private boolean answered;
@@ -42,7 +45,8 @@ public class TestFragment extends Fragment {
     private TextView tvQuestion, tvScore, tvQuestionNumber, tvCorrect, tvIncorrect;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2, rb3, rb4;
-    private Button NextButton, soundButton;
+    private Button NextButton;
+    private ImageButton soundButton;
 
     //MEDIA VARIABLES
     MediaPlayer snoverSound, murlocSound, pikachuSound, psyduckSound, squirtleSound, kricketuneSound, castformSound, zigzagoonSound, electrodeSound, zubatSound;
@@ -84,26 +88,37 @@ public class TestFragment extends Fragment {
         soundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (counter == 2){
-                    snoverSound.start();
-                }else if(counter == 4){
-                    murlocSound.start();
-                }else if(counter == 6){
-                    pikachuSound.start();
-                }else if (counter == 8){
-                    squirtleSound.start();
-                }else if (counter == 10){
-                    psyduckSound.start();
-                }else if (counter == 12){
-                    kricketuneSound.start();
-                }else if(counter == 14){
-                    castformSound.start();
-                }else if(counter == 16){
-                    zigzagoonSound.start();
-                }else if (counter == 18){
-                    electrodeSound.start();
-                }else if (counter == 20){
-                    zubatSound.start();
+                switch (currentQuestion.getId()){
+                    case 2:
+                        snoverSound.start();
+                        break;
+                    case 4:
+                        murlocSound.start();
+                        break;
+                    case 6:
+                        pikachuSound.start();
+                        break;
+                    case 8:
+                        squirtleSound.start();
+                        break;
+                    case 10:
+                        psyduckSound.start();
+                        break;
+                    case 12:
+                        kricketuneSound.start();
+                        break;
+                    case 14:
+                        castformSound.start();
+                        break;
+                    case 16:
+                        zigzagoonSound.start();
+                        break;
+                    case 18:
+                        electrodeSound.start();
+                        break;
+                    case 20:
+                        zubatSound.start();
+                        break;
                 }
             }
         });
@@ -147,7 +162,7 @@ public class TestFragment extends Fragment {
             rb3.setText(currentQuestion.getOpt3());
             rb4.setText(currentQuestion.getOpt4());
             counter++;
-            if (counter%2 == 0){
+            if (currentQuestion.getId() <= 20 && currentQuestion.getId()%2 == 0){
                 soundButton.setVisibility(View.VISIBLE);    //Activamos las preguntas con sonido para las mediaQuestions
             }
             NextButton.setText("Send");
@@ -223,14 +238,30 @@ public class TestFragment extends Fragment {
 
         savedInstanceState = getArguments();
 
-        questionsList = ((TestActivity)getActivity()).getQuestionsPool();
+        allQuestions = ((TestActivity)getActivity()).getQuestionsPool();
+
 
         //BUNDLE
         totalQuestions = savedInstanceState.getInt("totalQuestions");
         startTime = savedInstanceState.getLong("startTime");
 
+        fillQuestionsByNumber();
+
         perform(view);
         showNextQuestion();
 
     }
+
+    private void fillQuestionsByNumber() {
+        Random r = new Random();
+        int numberNextQ;
+
+        while(questionsList.size() < totalQuestions){
+            numberNextQ = r.nextInt(allQuestions.size());
+            questionsList.add(allQuestions.get(numberNextQ));
+            allQuestions.remove(numberNextQ);
+        }
+    }
+
+
 }

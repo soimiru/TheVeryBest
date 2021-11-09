@@ -16,6 +16,9 @@ public class Questions implements Parcelable {
     @ColumnInfo(name= "question")
     private String question;
 
+    @ColumnInfo(name= "sound")
+    private int sound;
+
     @ColumnInfo(name= "opt1")
     private String opt1;
 
@@ -31,8 +34,9 @@ public class Questions implements Parcelable {
     @ColumnInfo(name= "answer")
     private int answer;
 
-    public Questions(String question, String opt1, String opt2, String opt3, String opt4, int answer) {
+    public Questions(String question, int sound, String opt1, String opt2, String opt3, String opt4, int answer) {
         this.question = question;
+        this.sound = sound;
         this.opt1 = opt1;
         this.opt2 = opt2;
         this.opt3 = opt3;
@@ -42,6 +46,7 @@ public class Questions implements Parcelable {
 
     public Questions() {
         this.question = question;
+        this.sound = sound;
         this.opt1 = opt1;
         this.opt2 = opt2;
         this.opt3 = opt3;
@@ -115,6 +120,13 @@ public class Questions implements Parcelable {
         this.answer = answer;
     }
 
+    public int getSound() {
+        return sound;
+    }
+
+    public void setSound(int sound) {
+        this.sound = sound;
+    }
 
     public static final Creator<Questions> CREATOR = new Creator<Questions>() {
         @Override

@@ -114,13 +114,12 @@
         android:id="@+id/idfabDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_deletee"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="80dp"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/yourColorTitle">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:backgroundTint="@color/yourColorTitle"
+        android:src="@mipmap/ic_deletee"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/idfabUpdate"
@@ -130,8 +129,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="150dp"
         android:layout_marginBottom="10dp"
-        android:src="@mipmap/ic_update"
-        android:backgroundTint="@color/yourColorTitle">
-    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+        android:backgroundTint="@color/yourColorTitle"
+        android:src="@mipmap/ic_update"></com.google.android.material.floatingactionbutton.FloatingActionButton>
 
 </RelativeLayout>
