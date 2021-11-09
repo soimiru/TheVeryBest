@@ -26,7 +26,6 @@ public class TestActivity extends AppCompatActivity {
 
 
     //BASE DE DATOS
-    //private QuestionViewModel questionViewModel;
     private ArrayList<Questions> questionsPool;
     public QuestionViewModel questionViewModel ;
     private Questions currentQuestion;
@@ -76,24 +75,6 @@ public class TestActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container_view, testFragment)
                     .commit();
         }
-
-        //Base de datos
-        /*
-        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
-
-        questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
-            @Override
-            public void onChanged(List<Questions> questions) {
-                if(questionsPool == null){
-                    questionsPool = new ArrayList<Questions>();
-
-                    while(questions.size() > 0){
-                        questionsPool.add(questions.remove(0));
-                    }
-                }
-            }
-        });
-        */
 
         //TIMER
 

@@ -34,7 +34,8 @@ public class FinishActivity extends AppCompatActivity {
         int seconds = (int) (totalTime / 1000); //Transformamos los ms a segundos y minutos
         int minutes = seconds/60;
         seconds = seconds%60;
-        String time = minutes+":"+seconds;
+        //String time = minutes+":"+seconds;
+        String time = String.format("%d:%02d", minutes ,seconds);
 
 
         //RANKING
@@ -199,6 +200,7 @@ public class FinishActivity extends AppCompatActivity {
         values.put(Utilities.RANKING_right, totalCorrect);
         values.put(Utilities.RANKING_wrong, totalIncorrect);
         values.put(Utilities.RANKING_time, time);
+        values.put(Utilities.RANKING_totaltime, totalTime);
 
         Long idResult = db.insert(Utilities.RANKING_BD, Utilities.RANKING_id, values);
         if(idResult != 1){

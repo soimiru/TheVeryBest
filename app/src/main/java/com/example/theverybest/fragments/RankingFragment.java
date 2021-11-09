@@ -86,22 +86,8 @@ public class RankingFragment extends Fragment {
             }
         });
 
-        //recordsList = new ArrayList<>();
-        /*
-        checkRecords("Select j.playerid, j.score, j.right, j.wrong, j.time, p.id, p.name, p.avatar from " +
-                Utilities.RANKING_BD+ " j," + Utilities.PLAYERS_BD + " p where j.playerid = p.id order by j.score DESC");
-
-        checkRecords("Select r.playerid, r.score, r.right, r.wrong, r.time, p.id, p.name, p.avatar FROM "+ Utilities.RANKING_BD + " r INNER JOIN "
-                + Utilities.PLAYERS_BD +" p ON p.id=r.playerid");
-        */
-
-        checkRecords("SELECT * FROM " + Utilities.RANKING_BD + " ORDER BY score DESC" );
-        //checkRecords("select p.id, p.name, p.avatar, r."+Utilities.RANKING_playerid+" , r.score, r.right, r.wrong, r.time from players_bd p, ranking_bd r where p.id = r.playerid");
-
-        //recordsList.add(new RecordsVO( 2, "Clefairy", 2, 200, 3, 2, "00:20"));
-        //recordsList.add(new RecordsVO( 1, "Psyduck", 1, 200, 3, 2, "00:20"));
-        //recordsList.add(new RecordsVO( 3, "Magnemite", 3, 200, 3, 2, "00:20"));
-        //recordsList.add(new RecordsVO( 4, "Onyx", 2, 200, 3, 2, "00:20"));
+        //QUERY PARA MOSTRAR EL RANKING ORDENADO POR SCORE Y TIEMPO
+        checkRecords("SELECT * FROM " + Utilities.RANKING_BD + " ORDER BY score DESC, totaltime ASC" );
 
         fillRecordAdapter();
 
@@ -117,17 +103,16 @@ public class RankingFragment extends Fragment {
         RecordsVO recordsVO = null;
         recordsList = new ArrayList<RecordsVO>();
 
-        int av = 1;
         while(cursor.moveToNext()){
             recordsVO = new RecordsVO();
             recordsVO.setId(cursor.getInt(1));
             recordsVO.setName(cursor.getString(2));
             recordsVO.setAvatar(cursor.getInt(3));
-            System.out.println("AVATAR ID: " + cursor.getInt(3));
             recordsVO.setPoints(cursor.getInt(4));
             recordsVO.setCorrect(cursor.getInt(5));
             recordsVO.setIncorrect(cursor.getInt(6));
             recordsVO.setTime(cursor.getString(7));
+            recordsVO.setTotaltime(cursor.getInt(8));
 
             recordsList.add(recordsVO);
         }

@@ -66,12 +66,10 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         playerManagement = new PlayerManagementFragment();
         rankingFragment = new RankingFragment();
 
-
         TotalQuestions.add(5);
         TotalQuestions.add(10);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, TotalQuestions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
 
         questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
@@ -119,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         builder.setTitle("Player Manager")
                 .setMessage("Do you wish to sign up as a new player"+
                         " or log in as an existent one\n\n"+ 
-                        "You can modify your profile if you select MODIFY")
+                        "You can select and modify your profile if you select MODIFY")
                 .setNegativeButton("SIGN UP", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

@@ -49,11 +49,8 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPlayer holder, int position) {
-        //int av = playerList.get(position).getAvatar()-1;
-        //holder.imgAvatar.setImageResource(Utilities.avatarList.get(av).getAvatarId());
         holder.imgAvatar.setImageResource(Utilities.avatarList.get(playerList.get(position).getAvatar()-1).getAvatarId());
         holder.tvName.setText(playerList.get(position).getName());
-        //holder.tvBestScore.setText(playerList.get(position).getBestScore());
     }
 
     @Override

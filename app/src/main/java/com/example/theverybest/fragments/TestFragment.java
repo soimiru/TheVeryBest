@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -116,7 +117,7 @@ public class TestFragment extends Fragment {
                     if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
                         checkAnswer(v);
                     }else{
-                        //Toast.makeText(TestActivity.this, "Select one option", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(testActivity, "Select one option", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     showNextQuestion();
@@ -220,30 +221,6 @@ public class TestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-        /*
-        //Base de datos
-        QuestionViewModel questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
-        questionViewModel.getmAllQuestions().observe(getActivity(), new Observer<List<Questions>>() {
-            @Override
-            public void onChanged(List<Questions> questions) {
-
-                if(questionsList == null){
-                    /*questionsList = new ArrayList<Questions>();
-
-                    while(questions.size() > 0){
-                        questionsList.add(questions.remove(0));
-                    }*/
-
-                    /*
-                    questionsList = ((TestActivity)getActivity()).getQuestionsPool();
-                    perform(view);
-                    showNextQuestion();
-
-                }
-            }
-        });
-        */
-
         savedInstanceState = getArguments();
 
         questionsList = ((TestActivity)getActivity()).getQuestionsPool();
@@ -254,7 +231,6 @@ public class TestFragment extends Fragment {
 
         perform(view);
         showNextQuestion();
-
 
     }
 }

@@ -9,6 +9,7 @@ public class RecordsVO {
     private int correct;
     private int incorrect;
     private String time;
+    private int totaltime;
 
 
     public RecordsVO(){
@@ -79,6 +80,14 @@ public class RecordsVO {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getTotaltime() {
+        return totaltime;
+    }
+
+    public void setTotaltime(int totaltime) {
+        this.totaltime = totaltime;
     }
 }
 

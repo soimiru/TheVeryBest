@@ -1,7 +1,5 @@
 package com.example.theverybest;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,6 +7,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ImagesActivity extends AppCompatActivity {
 
@@ -43,8 +43,6 @@ public class ImagesActivity extends AppCompatActivity {
         tvOpt2 = findViewById(R.id.tvOpt2);
         tvOpt3 = findViewById(R.id.tvOpt3);
         tvOpt4 = findViewById(R.id.tvOpt4);
-
-
 
         tvQuestions = findViewById(R.id.TQuestionNumberImg);
         tvScore = findViewById(R.id.TPointsImg);

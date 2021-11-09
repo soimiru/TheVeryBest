@@ -77,7 +77,7 @@ public class RegistryPlayerFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_registry_player, container, false);
         backButton = view.findViewById(R.id.backButton);
         recyclerAvatar = view.findViewById(R.id.recyclerAvatar);
-        recyclerAvatar.setLayoutManager(new GridLayoutManager(this.activity, 2));
+        recyclerAvatar.setLayoutManager(new GridLayoutManager(this.activity, 3));
         recyclerAvatar.setHasFixedSize(true);
 
         nickField = view.findViewById(R.id.nicknameInput);  //NICKNAME

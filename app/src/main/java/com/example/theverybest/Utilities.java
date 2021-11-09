@@ -37,6 +37,7 @@ public class Utilities {
     public static final String RANKING_right = "right";
     public static final String RANKING_wrong = "wrong";
     public static final String RANKING_time = "time";
+    public static final String RANKING_totaltime = "totaltime";
 
     public static final String CREATE_RANKING_TABLE = "CREATE TABLE " + RANKING_BD + " ("+ RANKING_id + " INTEGER PRIMARY KEY,"+
                                                                                             RANKING_playerid + " INTEGER,"+
@@ -45,7 +46,8 @@ public class Utilities {
                                                                                             RANKING_score + " INTEGER,"+
                                                                                             RANKING_right + " INTEGER,"+
                                                                                             RANKING_wrong + " INTEGER,"+
-                                                                                            RANKING_time + " INTEGER)";
+                                                                                            RANKING_time + " INTEGER,"+
+                                                                                            RANKING_totaltime + " INTEGER)";
 
 
     public static void getAvatarList(){

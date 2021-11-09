@@ -49,7 +49,6 @@ public class PlayerManagementFragment extends Fragment {
     PlayerVO playerSelected;
     int deleteEvent = 0;
 
-
     RecyclerView recyclerAvatars, recyclerPlayers;
     EditText nickField;
     TextView barSelected;
@@ -61,7 +60,6 @@ public class PlayerManagementFragment extends Fragment {
     public PlayerManagementFragment() {
         // Required empty public constructor
     }
-
 
     public static PlayerManagementFragment newInstance(String param1, String param2) {
         PlayerManagementFragment fragment = new PlayerManagementFragment();
@@ -101,7 +99,7 @@ public class PlayerManagementFragment extends Fragment {
         recyclerPlayers.setLayoutManager(new LinearLayoutManager(this.activity));
         recyclerPlayers.setHasFixedSize(true);
 
-        recyclerAvatars.setLayoutManager(new GridLayoutManager(this.activity, 2));
+        recyclerAvatars.setLayoutManager(new GridLayoutManager(this.activity, 3));
         recyclerAvatars.setHasFixedSize(true);
 
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +149,6 @@ public class PlayerManagementFragment extends Fragment {
 
                     deleteEvent = 0;
                     interfaceComunicationFragments.showMenu();
-                    Toast.makeText(activity, "Welcome " + GamePreferences.nicknamePreferences + " "+ GamePreferences.avatarIDPreferences, Toast.LENGTH_SHORT).show();
 
                 }else{
                     Toast.makeText(activity, "Select one player.", Toast.LENGTH_SHORT).show();
