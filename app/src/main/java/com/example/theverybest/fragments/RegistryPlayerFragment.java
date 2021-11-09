@@ -138,7 +138,7 @@ public class RegistryPlayerFragment extends Fragment {
 
                 //GUARDAMOS EN LAS PREFERENCIAS DE LA APP EL NOMBRE Y EL AVATAR DEL JUGADOR CREADO
                 GamePreferences.playerIDPreferences = Integer.parseInt(idResult + "");
-                GamePreferences.nicknamePreferences = "Welcome " + nickField.getText().toString();
+                GamePreferences.nicknamePreferences = nickField.getText().toString();
                 GamePreferences.avatarIDPreferences = Utilities.selectedAvatar.getId();
 
                 SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);

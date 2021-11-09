@@ -95,7 +95,8 @@ public class RankingFragment extends Fragment {
                 + Utilities.PLAYERS_BD +" p ON p.id=r.playerid");
         */
 
-        checkRecords("SELECT * FROM " + Utilities.RANKING_BD + " CROSS JOIN " + Utilities.PLAYERS_BD );
+        checkRecords("SELECT * FROM " + Utilities.RANKING_BD + " ORDER BY score DESC" );
+        //checkRecords("select p.id, p.name, p.avatar, r."+Utilities.RANKING_playerid+" , r.score, r.right, r.wrong, r.time from players_bd p, ranking_bd r where p.id = r.playerid");
 
         //recordsList.add(new RecordsVO( 2, "Clefairy", 2, 200, 3, 2, "00:20"));
         //recordsList.add(new RecordsVO( 1, "Psyduck", 1, 200, 3, 2, "00:20"));
@@ -119,13 +120,14 @@ public class RankingFragment extends Fragment {
         int av = 1;
         while(cursor.moveToNext()){
             recordsVO = new RecordsVO();
-            recordsVO.setId(cursor.getInt(0));
-            recordsVO.setName("Pepitou");
-            recordsVO.setAvatar(av);
-            recordsVO.setPoints(cursor.getInt(1));
-            recordsVO.setCorrect(cursor.getInt(2));
-            recordsVO.setIncorrect(cursor.getInt(3));
-            recordsVO.setTime(cursor.getString(4));
+            recordsVO.setId(cursor.getInt(1));
+            recordsVO.setName(cursor.getString(2));
+            recordsVO.setAvatar(cursor.getInt(3));
+            System.out.println("AVATAR ID: " + cursor.getInt(3));
+            recordsVO.setPoints(cursor.getInt(4));
+            recordsVO.setCorrect(cursor.getInt(5));
+            recordsVO.setIncorrect(cursor.getInt(6));
+            recordsVO.setTime(cursor.getString(7));
 
             recordsList.add(recordsVO);
         }

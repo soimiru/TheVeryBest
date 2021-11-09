@@ -143,7 +143,7 @@ public class PlayerManagementFragment extends Fragment {
 
                 if (nickField.getText().toString() != null && !nickField.getText().toString().trim().equals("")){
                     //AL SELECCIONAR UN NUEVO JUGADOR, GUARDAMOS SUS DATOS EN LAS PREFERENCIAS.
-                    GamePreferences.nicknamePreferences = "Welcome "+nickField.getText().toString();
+                    GamePreferences.nicknamePreferences = nickField.getText().toString()+"";
                     GamePreferences.avatarIDPreferences = Utilities.selectedAvatar.getId();
                     GamePreferences.playerIDPreferences = playerSelected.getId();
                     SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);

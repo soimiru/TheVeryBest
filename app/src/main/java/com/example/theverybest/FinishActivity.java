@@ -184,12 +184,17 @@ public class FinishActivity extends AppCompatActivity {
 
     private void registrarResultados(String time) {
         int player = GamePreferences.playerIDPreferences;
+        String playername = GamePreferences.nicknamePreferences;
+        int playeravatar = GamePreferences.avatarIDPreferences;
 
         ConexionSQLiteHelper conn = new ConexionSQLiteHelper(this, Utilities.RANKING_BD, null, 1);
         SQLiteDatabase db = conn.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(Utilities.RANKING_playerid, player);
+        values.put(Utilities.RANKING_playerid, player);
+        values.put(Utilities.RANKING_playername, playername);
+        values.put(Utilities.RANKING_playeravatar, playeravatar);
         values.put(Utilities.RANKING_score, score);
         values.put(Utilities.RANKING_right, totalCorrect);
         values.put(Utilities.RANKING_wrong, totalIncorrect);

@@ -34,13 +34,14 @@ public class RecordsAdapter extends RecyclerView.Adapter<RecordsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderRecords holder, int position) {
-        holder.imgAvatar.setImageResource(Utilities.avatarList.get(recordsList.get(position).getAvatar()-1).getAvatarId());
-        holder.nickname.setText(recordsList.get(position).getName());
-        holder.points.setText(recordsList.get(position).getPoints()+"");
-        holder.time.setText(recordsList.get(position).getTime());
-        holder.right.setText(recordsList.get(position).getCorrect()+"");
-        holder.wrong.setText(recordsList.get(position).getIncorrect()+"");
-
+        if(recordsList.get(position).getAvatar() != 0){
+            holder.imgAvatar.setImageResource(Utilities.avatarList.get(recordsList.get(position).getAvatar()-1).getAvatarId());
+            holder.nickname.setText(recordsList.get(position).getName());
+            holder.points.setText(recordsList.get(position).getPoints()+"");
+            holder.time.setText(recordsList.get(position).getTime());
+            holder.right.setText(recordsList.get(position).getCorrect()+"");
+            holder.wrong.setText(recordsList.get(position).getIncorrect()+"");
+        }
     }
 
     @Override

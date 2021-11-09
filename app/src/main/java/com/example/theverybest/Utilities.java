@@ -18,8 +18,8 @@ public class Utilities {
     public static int selectedAvatarID = 0;
 
     //SQLITE TABLA JUGADORES
-    public static final String PLAYERS_BD = "players_bd";
-    public static final String PLAYERS_ID = "id";
+    public static final String PLAYERS_BD = "players_bd";   //NOMBRE TABLA
+    public static final String PLAYERS_ID = "id";           //CLAVE PRIMARIA
     public static final String PLAYERS_NAME = "name";
     public static final String PLAYERS_AVATAR = "avatar";
     public static final String PLAYERS_BESTSCORE = "bestscore";
@@ -28,9 +28,11 @@ public class Utilities {
 
 
     //SQLITE TABLA RANKING
-    public static final String RANKING_BD = "ranking_bd";
-    public static final String RANKING_id = "ranking_id";
-    public static final String RANKING_playerid = "playerid";
+    public static final String RANKING_BD = "ranking_bd";   //NOMBRE TABLA
+    public static final String RANKING_id = "ranking_id";   //CLAVE PRIMARIA
+    public static final String RANKING_playerid = "playerid";   //CLAVE FORANEA
+    public static final String RANKING_playername = "playername";
+    public static final String RANKING_playeravatar = "playeravatar";
     public static final String RANKING_score = "score";
     public static final String RANKING_right = "right";
     public static final String RANKING_wrong = "wrong";
@@ -38,6 +40,8 @@ public class Utilities {
 
     public static final String CREATE_RANKING_TABLE = "CREATE TABLE " + RANKING_BD + " ("+ RANKING_id + " INTEGER PRIMARY KEY,"+
                                                                                             RANKING_playerid + " INTEGER,"+
+                                                                                            RANKING_playername + " TEXT,"+
+                                                                                            RANKING_playeravatar + " INTEGER,"+
                                                                                             RANKING_score + " INTEGER,"+
                                                                                             RANKING_right + " INTEGER,"+
                                                                                             RANKING_wrong + " INTEGER,"+
