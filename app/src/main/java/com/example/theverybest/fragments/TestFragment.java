@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -132,7 +131,7 @@ public class TestFragment extends Fragment {
                     if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
                         checkAnswer(v);
                     }else{
-                        Toast.makeText(testActivity, "Select one option", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(testActivity, "Select one option", Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     showNextQuestion();
