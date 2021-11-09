@@ -7,13 +7,10 @@ import android.os.Handler;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.theverybest.fragments.TestFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class TestActivity extends AppCompatActivity {
@@ -61,6 +58,8 @@ public class TestActivity extends AppCompatActivity {
         //Inicialización de las variables
         Boolean hardmode = getIntent().getBooleanExtra("Hardmode", false);
         totalQuestions = getIntent().getIntExtra("NumberQuestions", 5);
+        questionsPool = new ArrayList<>();
+        questionsPool = getIntent().getParcelableArrayListExtra("QuestionsPool");
         tvTimer = findViewById(R.id.TTimer);
 
         TestFragment testFragment = new TestFragment();
@@ -79,6 +78,7 @@ public class TestActivity extends AppCompatActivity {
         }
 
         //Base de datos
+        /*
         questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
 
         questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
@@ -93,6 +93,7 @@ public class TestActivity extends AppCompatActivity {
                 }
             }
         });
+        */
 
         //TIMER
 

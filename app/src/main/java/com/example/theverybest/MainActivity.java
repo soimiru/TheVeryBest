@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.preference.PreferenceManager;
 
 import com.example.theverybest.fragments.InitFragment;
@@ -22,6 +24,7 @@ import com.example.theverybest.fragments.RegistryPlayerFragment;
 import com.example.theverybest.interfaces.IComunicationFragments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements IComunicationFragments,
         InitFragment.OnFragmentInteractionListener ,
@@ -36,6 +39,12 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
     Fragment registryPlayer;
     Fragment playerManagement;
     Fragment rankingFragment;
+
+    public QuestionViewModel questionViewModel ;
+    private ArrayList<Questions> questionsPool;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,22 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
+        questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
+
+        questionViewModel.getmAllQuestions().observe(this, new Observer<List<Questions>>() {
+            @Override
+            public void onChanged(List<Questions> questions) {
+                if(questionsPool == null){
+                    questionsPool = new ArrayList<Questions>();
+
+                    while(questions.size() > 0){
+                        questionsPool.add(questions.remove(0));
+                    }
+                }
+            }
+        });
+
+
     }
 
     public void startTest(){
@@ -75,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements IComunicationFrag
         Intent intent = new Intent(MainActivity.this, TestActivity.class);
         intent.putExtra("Hardmode", GamePreferences.gM);
         intent.putExtra("NumberQuestions", GamePreferences.nQ);
+        intent.putExtra("QuestionsPool", questionsPool);
         startActivity(intent);
     }
 

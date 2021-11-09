@@ -1,5 +1,6 @@
 package com.example.theverybest.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -13,21 +14,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.theverybest.FinishActivity;
-import com.example.theverybest.QuestionViewModel;
 import com.example.theverybest.Questions;
 import com.example.theverybest.R;
 import com.example.theverybest.TestActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TestFragment extends Fragment {
 
     private ArrayList<Questions> questionsList = new ArrayList<Questions>();
+    Activity testActivity = getActivity();
     private Questions currentQuestion;
     private boolean answered;
 
@@ -222,7 +220,7 @@ public class TestFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
 
-
+        /*
         //Base de datos
         QuestionViewModel questionViewModel = new ViewModelProvider(this).get(QuestionViewModel.class);
         questionViewModel.getmAllQuestions().observe(getActivity(), new Observer<List<Questions>>() {
@@ -236,7 +234,7 @@ public class TestFragment extends Fragment {
                         questionsList.add(questions.remove(0));
                     }*/
 
-
+                    /*
                     questionsList = ((TestActivity)getActivity()).getQuestionsPool();
                     perform(view);
                     showNextQuestion();
@@ -244,6 +242,7 @@ public class TestFragment extends Fragment {
                 }
             }
         });
+        */
 
         savedInstanceState = getArguments();
 
@@ -253,6 +252,8 @@ public class TestFragment extends Fragment {
         totalQuestions = savedInstanceState.getInt("totalQuestions");
         startTime = savedInstanceState.getLong("startTime");
 
+        perform(view);
+        showNextQuestion();
 
 
     }
